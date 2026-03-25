@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Missão Instagram | Play7</title>
+    <style>
+        :root { --insta-grad: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); --bg: #0a0c12; }
+        body { font-family: 'Inter', sans-serif; background: var(--bg); color: #fff; margin: 0; padding: 20px; text-align: center; }
+        
+        .header-instrucoes { background: #1db954; padding: 30px; border-radius: 20px; margin-bottom: 20px; box-shadow: 0 10px 30px rgba(29, 185, 84, 0.2); }
+        .header-instrucoes h1 { margin: 0; font-size: 1.8rem; font-weight: 900; }
+        .header-instrucoes p { font-size: 0.9rem; opacity: 0.9; margin-top: 10px; }
+
+        .ads-container { margin: 20px 0; background: #171a26; border-radius: 10px; padding: 10px; display: inline-block; min-width: 300px; }
+
+        .grid-perfis { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 15px; max-width: 600px; margin: 0 auto; }
+        .btn-insta { background: var(--insta-grad); border: none; padding: 15px; border-radius: 12px; color: #fff; font-weight: bold; cursor: pointer; transition: 0.3s; text-decoration: none; display: block; font-size: 0.8rem; }
+        .btn-insta:active { transform: scale(0.95); }
+    </style>
+</head>
+<body>
+
+    <div class="header-instrucoes">
+        <h1>MISSAO: INFLUENCER 📸</h1>
+        <p>Siga os 50 perfis abaixo para validar seu saldo de <b>R$ 30,00</b>.</p>
+    </div>
+
+    <div class="ads-container">
+        <script>
+            atOptions = { 'key' : 'e50da0e4d0e31f82b02ed935db9e71fb', 'format' : 'iframe', 'height' : 250, 'width' : 300, 'params' : {} };
+        </script>
+        <script src="https://freelygreatestscammer.com/e50da0e4d0e31f82b02ed935db9e71fb/invoke.js"></script>
+    </div>
+
+    <div class="grid-perfis">
+        <a href="SEU_LINK_ADSTERRA_AQUI" target="_blank" class="btn-insta">SEGUIR PERFIL 01</a>
+        <a href="SEU_LINK_ADSTERRA_AQUI" target="_blank" class="btn-insta">SEGUIR PERFIL 02</a>
+        <a href="SEU_LINK_ADSTERRA_AQUI" target="_blank" class="btn-insta">SEGUIR PERFIL 03</a>
+        <a href="SEU_LINK_ADSTERRA_AQUI" target="_blank" class="btn-insta">SEGUIR PERFIL 04</a>
+    </div>
+
+    <div class="ads-container">
+        <script src="https://freelygreatestscammer.com/e50da0e4d0e31f82b02ed935db9e71fb/invoke.js"></script>
+    </div>
+
+</body>
+</html>
