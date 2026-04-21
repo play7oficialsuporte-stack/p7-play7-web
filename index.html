@@ -29,23 +29,24 @@
         .balance-val { font-size: 2.8rem; color: var(--primary); font-weight: 800; margin: 5px 0; }
         .promo-banner { width: 100%; border-radius: 12px; margin-top: 15px; border: 1px solid var(--border); }
         
-        /* ESTILO VOLTADO AO ORIGINAL (IMAGEM ENVIADA) */
+        /* CAIXA DE INDICAÇÃO AJUSTADA (MAIS FINA E COMPRIDA) */
         .invite-alert { 
             background: #012b15; 
-            border: 3px solid #00e676; 
-            border-radius: 35px; 
+            border: 2px solid #00e676; 
+            border-radius: 50px; /* Bordas bem circulares para parecer pílula */
             margin: 0 20px 20px 20px; 
-            padding: 20px 25px; 
+            padding: 10px 25px; /* Reduzi o padding vertical de 20px para 10px */
             display: flex; 
             align-items: center; 
-            gap: 15px; 
+            gap: 12px; 
             cursor: pointer; 
             text-decoration: none;
+            box-shadow: 0 0 15px rgba(0, 230, 118, 0.1);
         }
-        .invite-icon { font-size: 2.5rem; }
-        .invite-txt b { color: #00e676; font-size: 1.4rem; font-weight: 900; display: block; }
-        .invite-txt p { margin: 2px 0 0 0; font-size: 1rem; color: #b0b3b8; }
-        .arrow-right { margin-left: auto; color: #00e676; font-size: 1.5rem; font-weight: 900; }
+        .invite-icon { font-size: 1.8rem; } /* Ícone menor para caber na caixa fina */
+        .invite-txt b { color: #00e676; font-size: 1.1rem; font-weight: 900; display: block; line-height: 1.2; }
+        .invite-txt p { margin: 0; font-size: 0.85rem; color: #b0b3b8; }
+        .arrow-right { margin-left: auto; color: #00e676; font-size: 1.2rem; font-weight: 900; }
 
         /* MISSÕES */
         .section-title { border-left: 5px solid var(--primary); padding-left: 12px; margin: 25px 20px; font-size: 1.3rem; font-weight: 800; }
