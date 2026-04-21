@@ -29,24 +29,29 @@
         .balance-val { font-size: 2.8rem; color: var(--primary); font-weight: 800; margin: 5px 0; }
         .promo-banner { width: 100%; border-radius: 12px; margin-top: 15px; border: 1px solid var(--border); }
         
-        /* CAIXA DE INDICAÇÃO AJUSTADA (MAIS FINA E COMPRIDA) */
+        /* CAIXA DE INDICAÇÃO - ESTILO DO PRIMEIRO CÓDIGO (RETANGULAR + GRADIENTE + PULSE) */
         .invite-alert { 
-            background: #012b15; 
-            border: 2px solid #00e676; 
-            border-radius: 50px; /* Bordas bem circulares para parecer pílula */
+            background: linear-gradient(135deg, #1a1d2e 0%, #004d28 100%); 
+            border: 2px solid var(--primary); 
+            border-radius: 16px; 
             margin: 0 20px 20px 20px; 
-            padding: 10px 25px; /* Reduzi o padding vertical de 20px para 10px */
+            padding: 15px; 
             display: flex; 
             align-items: center; 
-            gap: 12px; 
+            gap: 15px; 
             cursor: pointer; 
             text-decoration: none;
-            box-shadow: 0 0 15px rgba(0, 230, 118, 0.1);
+            animation: pulse 2s infinite; 
         }
-        .invite-icon { font-size: 1.8rem; } /* Ícone menor para caber na caixa fina */
-        .invite-txt b { color: #00e676; font-size: 1.1rem; font-weight: 900; display: block; line-height: 1.2; }
-        .invite-txt p { margin: 0; font-size: 0.85rem; color: #b0b3b8; }
-        .arrow-right { margin-left: auto; color: #00e676; font-size: 1.2rem; font-weight: 900; }
+        @keyframes pulse { 
+            0% { box-shadow: 0 0 0 0 rgba(0, 230, 118, 0.4); } 
+            70% { box-shadow: 0 0 0 10px rgba(0, 230, 118, 0); } 
+            100% { box-shadow: 0 0 0 0 rgba(0, 230, 118, 0); } 
+        }
+        .invite-icon { font-size: 2rem; }
+        .invite-txt b { color: var(--primary); font-size: 1.1rem; font-weight: 900; }
+        .invite-txt p { margin: 3px 0 0 0; font-size: 0.85rem; color: #b0b3b8; }
+        .arrow-right { margin-left: auto; color: var(--primary); font-weight: 900; }
 
         /* MISSÕES */
         .section-title { border-left: 5px solid var(--primary); padding-left: 12px; margin: 25px 20px; font-size: 1.3rem; font-weight: 800; }
@@ -141,7 +146,6 @@
         <div class="task"><div class="task-info"><strong>TIKTOK / KINDLE</strong><br><small>Assinar/Baixar</small><b>+ R$ 4,00</b></div><button class="btn" onclick="executarMissao(this, 'tiktok-kindle.html', 4.00, 5000, 'm19')">INICIAR</button></div>
         <div class="task" style="border: 1px solid var(--accent);"><div class="task-info"><strong>#GAME #20</strong><br><small>Flappy Bird</small><b>+ R$ 0,40</b></div><button class="btn" style="background:var(--accent)" onclick="executarMissao(this, 'game20.html', 0.40, 5000, 'm20')">JOGAR</button></div>
         <div class="ad-container"><div id="container-dd67faf43ae614125e2514fd79f215d3"></div></div>
-
         <div class="task"><div class="task-info"><strong>VÍDEO #21</strong><br><small>Assista 30s</small><b>+ R$ 0,50</b></div><button class="btn" onclick="executarMissao(this, 'video21.html', 0.50, 30000, 'm21')">INICIAR</button></div>
         <div class="task"><div class="task-info"><strong>KWAI</strong><br><small>Assistir Vídeos</small><b>+ R$ 2,00</b></div><button class="btn" onclick="executarMissao(this, 'kwai.html', 2.00, 5000, 'm22')">INICIAR</button></div>
         <div class="task"><div class="task-info"><strong>BANCO PAN</strong><br><small>Abrir Conta Grátis</small><b>+ R$ 15,00</b></div><button class="btn" onclick="executarMissao(this, 'bancopan.html', 15.00, 5000, 'm23')">INICIAR</button></div>
@@ -271,7 +275,6 @@
         <div class="task"><div class="task-info"><strong>MISSÃO #103</strong><br><small>Entrar Discord</small><b>+ R$ 2,00</b></div><button class="btn" onclick="executarMissao(this, 'discord.html', 2.00, 5000, 'm103')">INICIAR</button></div>
         <div class="task"><div class="task-info"><strong>MISSÃO #104</strong><br><small>Compartilhar App</small><b>+ R$ 3,00</b></div><button class="btn" onclick="executarMissao(this, 'share.html', 3.00, 5000, 'm104')">INICIAR</button></div>
         <div class="task" style="border: 2px solid var(--primary);"><div class="task-info"><strong>MISSÃO #105</strong><br><small>Ouro Final</small><b>+ R$ 10,00</b></div><button class="btn" onclick="executarMissao(this, 'ouro.html', 10.00, 5000, 'm105')">FINALIZAR</button></div>
-
     </div>
 
     <div class="nav">
@@ -350,4 +353,4 @@
         };
     </script>
 </body>
-</html>
+                                      </html>
