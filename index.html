@@ -2,159 +2,356 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>P7 Play7 | Missões</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Play7 | Missões Lucrativas</title>
+    
+    <link rel="icon" type="image/png" href="https://i.ibb.co/KcJjFWFv/Polish-20260420-144050885.png">
+
     <style>
-        :root {
-            --bg-body: #0f121a;
-            --bg-card: #1c222d;
-            --neon-green: #00e676;
-            --orange-vibrant: #ff9100;
-            --text-gray: #b0b8c1;
-        }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--bg-body);
-            color: white;
-            margin: 0;
-            padding: 0;
-        }
-
-        /* Barra Superior */
-        .top-bar {
-            display: flex;
-            justify-content: space-between;
-            padding: 15px;
-            font-size: 0.9rem;
-            border-bottom: 1px solid #252e3a;
-        }
-
-        .user-name { color: var(--neon-green); font-weight: bold; }
-        .user-id { color: #555; }
-
-        .content { padding: 15px; max-width: 500px; margin: auto; }
-
-        /* Banner */
-        .banner {
-            width: 100%;
-            border-radius: 15px;
-            margin-bottom: 20px;
-            display: block;
-        }
-
-        /* Títulos com Borda Lateral */
-        .section-title {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 1.2rem;
-            margin: 20px 0;
-        }
-
-        .section-title::before {
-            content: "";
-            width: 4px;
-            height: 20px;
-            background-color: var(--neon-green);
-            border-radius: 2px;
-        }
-
-        /* Cards de Missões */
-        .card {
-            background: var(--bg-card);
-            border-radius: 12px;
-            padding: 15px;
-            margin-bottom: 12px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border: 1px solid #2a3341;
-        }
-
-        .card-info h4 { margin: 0; font-size: 1rem; }
-        .card-info p { margin: 5px 0 0; color: var(--text-gray); font-size: 0.8rem; }
-
-        .btn-action {
-            padding: 10px 25px;
-            border-radius: 8px;
-            border: none;
-            font-weight: bold;
-            text-transform: uppercase;
-            cursor: pointer;
-        }
-
-        .btn-green { background: var(--neon-green); color: #000; }
-        .btn-orange { background: var(--orange-vibrant); color: #000; }
-
-        /* Menu de Navegação */
-        .nav-footer {
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-            background: #151a24;
-            display: flex;
-            justify-content: space-around;
-            padding: 12px 0;
-            border-top: 1px solid #252e3a;
-        }
-
-        .nav-item {
-            text-align: center;
-            font-size: 0.7rem;
-            color: var(--text-gray);
-            text-decoration: none;
-        }
-
-        .nav-item.active { color: var(--neon-green); }
-        .nav-item img { width: 20px; display: block; margin: 0 auto 5px; }
+        /* [SEU CSS MANTIDO INTEGRALMENTE] */
+        * { box-sizing: border-box; } 
+        :root { --bg-deep: #0f111a; --bg-card: #171a26; --primary: #00e676; --accent: #ff9100; --text: #ffffff; --border: #2d313d; }
+        body { font-family: 'Inter', sans-serif; background: var(--bg-deep); color: var(--text); margin: 0; padding-bottom: 100px; overflow-x: hidden; width: 100%; }
+        .header { background: rgba(23,26,38,0.95); padding: 0 20px; border-bottom: 1px solid var(--border); position: fixed; top: 0; width: 100%; z-index: 100; backdrop-filter: blur(10px); display: flex; justify-content: space-between; align-items: center; height: 80px; }
+        #user-display { color:var(--primary); font-weight: 900; font-size: 1.5rem; }
+        .user-area { display: flex; align-items: center; gap: 8px; position: relative; }
+        .flag-icon { width: 24px; height: 18px; object-fit: cover; border-radius: 2px; border: 1px solid rgba(255,255,255,0.2); cursor: pointer; }
+        .lang-menu { display: none; position: absolute; top: 35px; right: 0; background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; padding: 10px; width: 130px; z-index: 500; box-shadow: 0 10px 25px rgba(0,0,0,0.5); }
+        .lang-option { display: flex; align-items: center; gap: 10px; padding: 8px; font-size: 0.8rem; color: #ccc; transition: 0.2s; }
+        .lang-option:hover { color: var(--primary); background: rgba(255,255,255,0.05); border-radius: 5px; }
+        .bell-btn { background: none; border: none; cursor: pointer; position: relative; display: flex; align-items: center; }
+        .bell-btn img { width: 45px; height: 45px; }
+        .notification-dot { position: absolute; top: 5px; right: 5px; width: 12px; height: 12px; background: #ff4444; border-radius: 50%; display: none; border: 2px solid var(--bg-deep); box-shadow: 0 0 8px #ff4444; }
+        .balance-box { margin-top: 100px; padding: 20px; }
+        .card { background: var(--bg-card); border-radius: 16px; border: 1px solid var(--border); padding: 20px; text-align: center; }
+        .balance-val { font-size: 2.8rem; color: var(--primary); font-weight: 800; margin: 5px 0; }
+        .promo-banner { width: 100%; border-radius: 12px; margin-top: 15px; border: 1px solid var(--border); }
+        .invite-alert { background: linear-gradient(135deg, #1a1d2e 0%, #004d28 100%); border: 2px solid var(--primary); border-radius: 16px; margin: 0 20px 20px 20px; padding: 15px; display: flex; align-items: center; gap: 15px; cursor: pointer; animation: pulse 2s infinite; }
+        @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(0, 230, 118, 0.4); } 70% { box-shadow: 0 0 0 10px rgba(0, 230, 118, 0); } 100% { box-shadow: 0 0 0 0 rgba(0, 230, 118, 0); } }
+        .invite-icon { font-size: 2rem; }
+        .invite-txt b { color: var(--primary); font-size: 1.1rem; }
+        .invite-txt p { margin: 3px 0 0 0; font-size: 0.85rem; color: #b0b3b8; }
+        .section-title { border-left: 5px solid var(--primary); padding-left: 12px; margin: 25px 20px; font-size: 1.3rem; font-weight: 800; }
+        .task-list { padding: 0 20px; }
+        .task { background: var(--bg-card); border: 1px solid var(--border); padding: 18px; border-radius: 15px; margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center; }
+        .task-info b { color: var(--primary); font-size: 1rem; display: block; margin-top: 4px; }
+        .btn { background: var(--primary); color: #000; border: none; padding: 12px 22px; border-radius: 10px; font-weight: 900; cursor: pointer; text-decoration: none; font-size: 0.85rem; text-transform: uppercase; }
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 2000; justify-content: center; align-items: center; }
+        .modal-content { background: var(--bg-card); padding: 35px; border-radius: 25px; text-align: center; border: 1px solid var(--primary); width: 85%; max-width: 400px; }
+        .nav { position: fixed; bottom: 0; left: 0; width: 100%; background: #0a0c12; display: flex; justify-content: space-around; padding: 12px 0; border-top: 1px solid var(--border); z-index: 1000; }
+        .nav a { color: #b0b3b8; text-decoration: none; font-size: 0.75rem; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 6px; }
+        .nav a img { width: 24px; height: 24px; }
+        .ad-container { margin: 25px 0; text-align: center; min-height: 50px; }
     </style>
 </head>
 <body>
 
-<div class="top-bar">
-    <span class="user-name">Usuário: Diogo</span>
-    <span class="user-id">ID: #773247</span>
-</div>
-
-<div class="content">
-    <img src="URL_DA_SUA_IMAGEM_BANNER" alt="Ganhe Dinheiro" class="banner">
-
-    <div class="section-title">Missões Disponíveis 🔥</div>
-
-    <div class="card" style="border: 1px solid var(--orange-vibrant);">
-        <div class="card-info">
-            <h4>#GAME</h4>
-            <p>Damas: Ganhe R$ 0,50 por 3 peças</p>
+    <div class="header">
+        <div class="user-area">
+            <div id="user-display">Olá, Diogo!</div>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/0/05/Flag_of_Brazil.svg" class="flag-icon" onclick="toggleLang()">
+            <div class="lang-menu" id="lang-menu">
+                <div class="lang-option"><img src="https://upload.wikimedia.org/wikipedia/commons/0/05/Flag_of_Brazil.svg" width="18"> Português</div>
+                <div class="lang-option"><img src="https://upload.wikimedia.org/wikipedia/commons/a/a4/Flag_of_the_United_States.svg" width="18"> English (US)</div>
+                <div class="lang-option"><img src="https://upload.wikimedia.org/wikipedia/commons/9/9a/Flag_of_Spain.svg" width="18"> Español</div>
+            </div>
         </div>
-        <button class="btn-action btn-orange">JOGAR</button>
+        <button class="bell-btn" onclick="abrirCheckin()">
+            <img src="https://i.ibb.co/fzCwSMq9/bell-reminder-icon-green-and-white-color-free-png.png">
+            <div id="dot" class="notification-dot"></div>
+        </button>
     </div>
 
-    <div class="card">
-        <div class="card-info">
-            <h4>#01</h4>
-            <p>Ouvir Spotify</p>
+    <div id="modal-checkin" class="modal">
+        <div class="modal-content">
+            <h2 style="color:var(--primary); margin-top:0;">Bônus Diário! 🎁</h2>
+            <p>Seu presente de <b>R$ 2,00</b> está pronto.</p>
+            <p style="font-size: 0.8rem; color: #888;">Visite o Mercado Livre: <b>+ R$ 0,50</b></p>
+            <button class="btn" onclick="realizarCheckin()" style="width:100%; padding:18px;">RESGATAR AGORA</button>
         </div>
-        <button class="btn-action btn-green">INICIAR</button>
     </div>
 
-    <div class="card">
-        <div class="card-info">
-            <h4>#02</h4>
-            <p>Seguir Instagram</p>
+    <div class="balance-box">
+        <div class="card">
+            <small style="letter-spacing:1px">SALDO TOTAL</small>
+            <div class="balance-val" id="saldo">R$ 0,00</div>
+            <img src="https://i.ibb.co/BKvPQYkY/file-0000000085ac720eaa6f569cf3d931ac.png" class="promo-banner">
         </div>
-        <button class="btn-action btn-green">INICIAR</button>
     </div>
 
-    <div style="height: 80px;"></div>
-</div>
+    <a href="indicar.html" style="text-decoration: none; color: inherit;">
+        <div class="invite-alert">
+            <div class="invite-icon">🏆</div>
+            <div class="invite-txt"><b>GANHE R$ 100,00 AGORA</b><p>Convide seus amigos e receba!</p></div>
+            <div style="margin-left: auto; color: var(--primary); font-weight: 900;">➔</div>
+        </div>
+    </a>
 
-<nav class="nav-footer">
-    <a href="#" class="nav-item active">🏠<br>Missões</a>
-    <a href="#" class="nav-item">👥<br>Indicar</a>
-    <a href="#" class="nav-item">🛠️<br>Suporte</a>
-    <a href="#" class="nav-item">💰<br>Sacar</a>
-</nav>
+    <h3 class="section-title">Missões Disponíveis 🔥</h3>
+    
+    <div class="task-list">
+        <div class="task"><div class="task-info"><strong>VÍDEO #01</strong><br><small>Assista 30s</small><b>+ R$ 0,50</b></div><button class="btn" onclick="executarMissao(this, 'video1.html', 0.50, 30000)">INICIAR</button></div>
+        <div class="task"><div class="task-info"><strong>MISSÃO #02</strong><br><small>Link de Afiliado</small><b>+ R$ 1,20</b></div><button class="btn" onclick="executarMissao(this, 'afiliado.html', 1.20, 5000)">INICIAR</button></div>
+        <div class="task"><div class="task-info"><strong>BANCO INTER</strong><br><small>Indicar Amigo</small><b>+ R$ 25,00</b></div><button class="btn" onclick="executarMissao(this, 'inter.html', 25.00, 5000)">INICIAR</button></div>
+        <div class="task"><div class="task-info"><strong>AMAZON MUSIC</strong><br><small>Ouvir Playlist</small><b>+ R$ 2,00</b></div><button class="btn" onclick="executarMissao(this, 'amazon.html', 2.00, 5000)">INICIAR</button></div>
+        <div class="task" style="border: 1px solid var(--accent);"><div class="task-info"><strong>#GAME #05</strong><br><small>Damas: 3 peças</small><b>+ R$ 0,50</b></div><a href="damas.html" class="btn" style="background:var(--accent)">JOGAR</a></div>
 
+        <div class="ad-container">
+            <script async="async" data-cfasync="false" src="https://freelygreatestscammer.com/dd67faf43ae614125e2514fd79f215d3/invoke.js"></script>
+            <div id="container-dd67faf43ae614125e2514fd79f215d3"></div>
+        </div>
+
+        <div class="task"><div class="task-info"><strong>VÍDEO #06</strong><br><small>Assista 30s</small><b>+ R$ 0,50</b></div><button class="btn" onclick="executarMissao(this, 'video6.html', 0.50, 30000)">INICIAR</button></div>
+        <div class="task"><div class="task-info"><strong>INSTAGRAM</strong><br><small>Seguir Perfil</small><b>+ R$ 1,50</b></div><button class="btn" onclick="executarMissao(this, 'insta.html', 1.50, 5000)">INICIAR</button></div>
+        <div class="task"><div class="task-info"><strong>BANCO DIGIO</strong><br><small>Indicar Conta</small><b>+ R$ 10,00</b></div><button class="btn" onclick="executarMissao(this, 'digio.html', 10.00, 5000)">INICIAR</button></div>
+        <div class="task"><div class="task-info"><strong>PRIME VIDEO</strong><br><small>Assinar Teste</small><b>+ R$ 5,00</b></div><button class="btn" onclick="executarMissao(this, 'prime.html', 5.00, 5000)">INICIAR</button></div>
+        <div class="task" style="border: 1px solid var(--accent);"><div class="task-info"><strong>#GAME #10</strong><br><small>Labirinto</small><b>+ R$ 0,40</b></div><a href="game10.html" class="btn" style="background:var(--accent)">JOGAR</a></div>
+
+        <div class="ad-container">
+             <div id="container-dd67faf43ae614125e2514fd79f215d3"></div>
+        <div class="task"><div class="task-info"><strong>VÍDEO #11</strong><br><small>Assista 30s</small><b>+ R$ 0,50</b></div><button class="btn" onclick="executarMissao(this, 'video11.html', 0.50, 30000)">INICIAR</button></div>
+        <div class="task" style="border-left: 5px solid #fff;"><div class="task-info"><strong>MAQUININHA TON</strong><br><small>Comprar/Indicar</small><b>+ R$ 150,00</b></div><button class="btn" onclick="executarMissao(this, 'ton.html', 150.00, 5000)">INICIAR</button></div>
+        <div class="task"><div class="task-info"><strong>MERCADO LIVRE</strong><br><small>Visitar Loja</small><b>+ R$ 0,50</b></div><button class="btn" onclick="executarMissao(this, 'mercadolivre.html', 0.50, 5000)">INICIAR</button></div>
+        <div class="task"><div class="task-info"><strong>AMAZON BEBÊ</strong><br><small>Lista de Enxoval</small><b>+ R$ 1,50</b></div><button class="btn" onclick="executarMissao(this, 'amazon-bebe.html', 1.50, 5000)">INICIAR</button></div>
+        <div class="task" style="border: 1px solid var(--accent);"><div class="task-info"><strong>#GAME #15</strong><br><small>Torre de Blocos</small><b>+ R$ 0,40</b></div><a href="game15.html" class="btn" style="background:var(--accent)">JOGAR</a></div>
+
+        <div class="ad-container">
+            <div id="container-dd67faf43ae614125e2514fd79f215d3"></div>
+        </div>
+
+        <div class="task"><div class="task-info"><strong>VÍDEO #16</strong><br><small>Assista 30s</small><b>+ R$ 0,50</b></div><button class="btn" onclick="executarMissao(this, 'video16.html', 0.50, 30000)">INICIAR</button></div>
+        <div class="task"><div class="task-info"><strong>APP PICPAY</strong><br><small>Baixar e Criar Conta</small><b>+ R$ 10,00</b></div><button class="btn" onclick="executarMissao(this, 'picpay.html', 10.00, 5000)">INICIAR</button></div>
+        <div class="task"><div class="task-info"><strong>SHOPEE</strong><br><small>Ofertas do Dia</small><b>+ R$ 0,50</b></div><button class="btn" onclick="executarMissao(this, 'shopee.html', 0.50, 5000)">INICIAR</button></div>
+        <div class="task"><div class="task-info"><strong>TIKTOK / KINDLE</strong><br><small>Assinar/Baixar</small><b>+ R$ 4,00</b></div><button class="btn" onclick="executarMissao(this, 'tiktok-kindle.html', 4.00, 5000)">INICIAR</button></div>
+        <div class="task" style="border: 1px solid var(--accent);"><div class="task-info"><strong>#GAME #20</strong><br><small>Flappy Bird</small><b>+ R$ 0,40</b></div><a href="game20.html" class="btn" style="background:var(--accent)">JOGAR</a></div>
+
+        <div class="ad-container">
+            <div id="container-dd67faf43ae614125e2514fd79f215d3"></div>
+        </div>
+
+        <div class="task"><div class="task-info"><strong>VÍDEO #21</strong><br><small>Assista 30s</small><b>+ R$ 0,50</b></div><button class="btn" onclick="executarMissao(this, 'video21.html', 0.50, 30000)">INICIAR</button></div>
+        <div class="task"><div class="task-info"><strong>MERCADO PAGO</strong><br><small>Baixar App</small><b>+ R$ 15,00</b></div><button class="btn" onclick="executarMissao(this, 'mercadopago.html', 15.00, 5000)">INICIAR</button></div>
+        <div class="task"><div class="task-info"><strong>CARRINHO AMAZON</strong><br><small>Adicionar Produto</small><b>+ R$ 1,00</b></div><button class="btn" onclick="executarMissao(this, 'amazon-carrinho.html', 1.00, 5000)">INICIAR</button></div>
+        <div class="task"><div class="task-info"><strong>BAIXAR KWAI</strong><br><small>Novo Usuário</small><b>+ R$ 8,00</b></div><button class="btn" onclick="executarMissao(this, 'kwai.html', 8.00, 5000)">INICIAR</button></div>
+        <div class="task" style="border: 1px solid var(--accent);"><div class="task-info"><strong>#GAME #25</strong><br><small>Sudoku Rápido</small><b>+ R$ 0,40</b></div><a href="game25.html" class="btn" style="background:var(--accent)">JOGAR</a></div>
+
+        <div class="ad-container">
+            <div id="container-dd67faf43ae614125e2514fd79f215d3"></div>
+        </div>
+
+        <div class="task"><div class="task-info"><strong>VÍDEO #26</strong><br><small>Assista 30s</small><b>+ R$ 0,50</b></div><button class="btn" onclick="executarMissao(this, 'video26.html', 0.50, 30000)">INICIAR</button></div>
+        <div class="task"><div class="task-info"><strong>VISITAR MANGÁ</strong><br><small>Ler Capítulo</small><b>+ R$ 0,30</b></div><button class="btn" onclick="executarMissao(this, 'manga.html', 0.30, 5000)">INICIAR</button></div>
+        <div class="task"><div class="task-info"><strong>ENTRETENIMENTO</strong><br><small>Visitar Site</small><b>+ R$ 0,30</b></div><button class="btn" onclick="executarMissao(this, 'entretenimento.html', 0.30, 5000)">INICIAR</button></div>
+        <div class="task"><div class="task-info"><strong>MISSÃO #29</strong><br><small>Link Externo</small><b>+ R$ 1,00</b></div><button class="btn" onclick="executarMissao(this, 'link29.html', 1.00, 5000)">INICIAR</button></div>
+        <div class="task" style="border: 1px solid var(--accent);"><div class="task-info"><strong>#GAME #30</strong><br><small>Corrida 2D</small><b>+ R$ 0,40</b></div><a href="game30.html" class="btn" style="background:var(--accent)">JOGAR</a></div>
+
+        <div class="ad-container">
+            <div id="container-dd67faf43ae614125e2514fd79f215d3"></div>
+        </div>
+
+        <div class="task"><div class="task-info"><strong>VÍDEO #31</strong><br><small>Assista 30s</small><b>+ R$ 0,50</b></div><button class="btn" onclick="executarMissao(this, 'video31.html', 0.50, 30000)">INICIAR</button></div>
+        <div class="task"><div class="task-info"><strong>CADASTRAR E-MAIL</strong><br><small>Responder Perguntas</small><b>+ R$ 3,50</b></div><button class="btn" onclick="executarMissao(this, 'email-pergunta.html', 3.50, 5000)">INICIAR</button></div>
+        <div class="task"><div class="task-info"><strong>PESQUISA CPX</strong><br><small>Responder Quiz</small><b>+ R$ 5,00</b></div><button class="btn" onclick="executarMissao(this, 'cpx.html', 5.00, 5000)">INICIAR</button></div>
+        <div class="task"><div class="task-info"><strong>MISSÃO #34</strong><br><small>Link Patrocinado</small><b>+ R$ 1,00</b></div><button class="btn" onclick="executarMissao(this, 'link34.html', 1.00, 5000)">INICIAR</button></div>
+        <div class="task" style="border: 1px solid var(--accent);"><div class="task-info"><strong>#GAME #35</strong><br><small>Quebra-Cabeça</small><b>+ R$ 0,40</b></div><a href="game35.html" class="btn" style="background:var(--accent)">JOGAR</a></div>
+
+        <div class="ad-container">
+            <div id="container-dd67faf43ae614125e2514fd79f215d3"></div>
+        </div>
+
+        <div class="task"><div class="task-info"><strong>VÍDEO #36</strong><br><small>Assista 30s</small><b>+ R$ 0,50</b></div><button class="btn" onclick="executarMissao(this, 'video36.html', 0.50, 30000)">INICIAR</button></div>
+        <div class="task"><div class="task-info"><strong>BAIXAR APP #37</strong><br><small>Instalação Direta</small><b>+ R$ 4,50</b></div><button class="btn" onclick="executarMissao(this, 'app37.html', 4.50, 5000)">INICIAR</button></div>
+        <div class="task"><div class="task-info"><strong>MISSÃO #38</strong><br><small>Link de Tarefa</small><b>+ R$ 1,00</b></div><button class="btn" onclick="executarMissao(this, 'link38.html', 1.00, 5000)">INICIAR</button></div>
+        <div class="task"><div class="task-info"><strong>MISSÃO #39</strong><br><small>Link de Tarefa</small><b>+ R$ 1,00</b></div><button class="btn" onclick="executarMissao(this, 'link39.html', 1.00, 5000)">INICIAR</button></div>
+        <div class="task" style="border: 1px solid var(--accent);"><div class="task-info"><strong>#GAME #40</strong><br><small>Sinuca Online</small><b>+ R$ 0,40</b></div><a href="game40.html" class="btn" style="background:var(--accent)">JOGAR</a></div>
+
+        <div class="task"><div class="task-info"><strong>VÍDEO #41</strong><br><small>Assista 30s</small><b>+ R$ 0,50</b></div><button class="btn" onclick="executarMissao(this, 'video41.html', 0.50, 30000)">INICIAR</button></div>
+        <div class="task"><div class="task-info"><strong>BAIXAR APP #42</strong><br><small>Instalação Direta</small><b>+ R$ 4,50</b></div><button class="btn" onclick="executarMissao(this, 'app42.html', 4.50, 5000)">INICIAR</button></div>
+        <div class="task"><div class="task-info"><strong>MISSÃO #43</strong><br><small>Link de Tarefa</small><b>+ R$ 1,00</b></div><button class="btn" onclick="executarMissao(this, 'link43.html', 1.00, 5000)">INICIAR</button></div>
+        <div class="task"><div class="task-info"><strong>MISSÃO #44</strong><br><small>Link de Tarefa</small><b>+ R$ 1,00</b></div><button class="btn" onclick="executarMissao(this, 'link44.html', 1.00, 5000)">INICIAR</button></div>
+        <div class="task" style="border: 1px solid var(--accent);"><div class="task-info"><strong>#GAME #45</strong><br><small>Brick Breaker</small><b>+ R$ 0,40</b></div><a href="game45.html" class="btn" style="background:var(--accent)">JOGAR</a></div>
+
+        <div class="ad-container">
+            <div id="container-dd67faf43ae614125e2514fd79f215d3"></div>
+        </div>
+
+        <div class="task"><div class="task-info"><strong>VÍDEO #46</strong><br><small>Assista 30s</small><b>+ R$ 0,50</b></div><button class="btn" onclick="executarMissao(this, 'video46.html', 0.50, 30000)">INICIAR</button></div>
+        <div class="task"><div class="task-info"><strong>BAIXAR APP #47</strong><br><small>Instalação Direta</small><b>+ R$ 4,50</b></div><button class="btn" onclick="executarMissao(this, 'app47.html', 4.50, 5000)">INICIAR</button></div>
+        <div class="task"><div class="task-info"><strong>MISSÃO #48</strong><br><small>Link de Tarefa</small><b>+ R$ 1,00</b></div><button class="btn" onclick="executarMissao(this, 'link48.html', 1.00, 5000)">INICIAR</button></div>
+        <div class="task"><div class="task-info"><strong>MISSÃO #49</strong><br><small>Link de Tarefa</small><b>+ R$ 1,00</b></div><button class="btn" onclick="executarMissao(this, 'link49.html', 1.00, 5000)">INICIAR</button></div>
+        <div class="task" style="border: 1px solid var(--accent);"><div class="task-info"><strong>#GAME #50</strong><br><small>Space Invaders</small><b>+ R$ 0,40</b></div><a href="game50.html" class="btn" style="background:var(--accent)">JOGAR</a></div>
+
+        <div class="ad-container">
+            <div id="container-dd67faf43ae614125e2514fd79f215d3"></div>
+        </div>
+
+        <div class="task"><div class="task-info"><strong>VÍDEO #51</strong><br><small>Assista 30s</small><b>+ R$ 0,50</b></div><button class="btn" onclick="executarMissao(this, 'video51.html', 0.50, 30000)">INICIAR</button></div>
+        <div class="task"><div class="task-info"><strong>BAIXAR APP #52</strong><br><small>Instalação Direta</small><b>+ R$ 4,50</b></div><button class="btn" onclick="executarMissao(this, 'app52.html', 4.50, 5000)">INICIAR</button></div>
+        <div class="task"><div class="task-info"><strong>MISSÃO #53</strong><br><small>Link de Tarefa</small><b>+ R$ 1,00</b></div><button class="btn" onclick="executarMissao(this, 'link53.html', 1.00, 5000)">INICIAR</button></div>
+        <div class="task"><div class="task-info"><strong>MISSÃO #54</strong><br><small>Link de Tarefa</small><b>+ R$ 1,00</b></div><button class="btn" onclick="executarMissao(this, 'link54.html', 1.00, 5000)">INICIAR</button></div>
+        <div class="task" style="border: 1px solid var(--accent);"><div class="task-info"><strong>#GAME #55</strong><br><small>Tetris Retro</small><b>+ R$ 0,40</b></div><a href="game55.html" class="btn" style="background:var(--accent)">JOGAR</a></div>
+
+        <div class="ad-container">
+            <div id="container-dd67faf43ae614125e2514fd79f215d3"></div>
+        </div>
+
+        <div class="task"><div class="task-info"><strong>VÍDEO #56</strong><br><small>Assista 30s</small><b>+ R$ 0,50</b></div><button class="btn" onclick="executarMissao(this, 'video56.html', 0.50, 30000)">INICIAR</button></div>
+        <div class="task"><div class="task-info"><strong>BAIXAR APP #57</strong><br><small>Instalação Direta</small><b>+ R$ 4,50</b></div><button class="btn" onclick="executarMissao(this, 'app57.html', 4.50, 5000)">INICIAR</button></div>
+        <div class="task"><div class="task-info"><strong>MISSÃO #58</strong><br><small>Link de Tarefa</small><b>+ R$ 1,00</b></div><button class="btn" onclick="executarMissao(this, 'link58.html', 1.00, 5000)">INICIAR</button></div>
+        <div class="task"><div class="task-info"><strong>MISSÃO #59</strong><br><small>Link de Tarefa</small><b>+ R$ 1,00</b></div><button class="btn" onclick="executarMissao(this, 'link59.html', 1.00, 5000)">INICIAR</button></div>
+        <div class="task" style="border: 1px solid var(--accent);"><div class="task-info"><strong>#GAME #60</strong><br><small>Snake Clássico</small><b>+ R$ 0,40</b></div><a href="game60.html" class="btn" style="background:var(--accent)">JOGAR</a></div>
+
+        <div class="ad-container">
+            <div id="container-dd67faf43ae614125e2514fd79f215d3"></div>
+        </div>
+
+        <div class="task"><div class="task-info"><strong>VÍDEO #61</strong><br><small>Assista 30s</small><b>+ R$ 0,50</b></div><button class="btn" onclick="executarMissao(this, 'video61.html', 0.50, 30000)">INICIAR</button></div>
+        <div class="task"><div class="task-info"><strong>BAIXAR APP #62</strong><br><small>Instalação Direta</small><b>+ R$ 4,50</b></div><button class="btn" onclick="executarMissao(this, 'app62.html', 4.50, 5000)">INICIAR</button></div>
+        <div class="task"><div class="task-info"><strong>MISSÃO #63</strong><br><small>Link de Tarefa</small><b>+ R$ 1,00</b></div><button class="btn" onclick="executarMissao(this, 'link63.html', 1.00, 5000)">INICIAR</button></div>
+        <div class="task"><div class="task-info"><strong>MISSÃO #64</strong><br><small>Link de Tarefa</small><b>+ R$ 1,00</b></div><button class="btn" onclick="executarMissao(this, 'link64.html', 1.00, 5000)">INICIAR</button></div>
+        <div class="task" style="border: 1px solid var(--accent);"><div class="task-info"><strong>#GAME #65</strong><br><small>Pac-Man</small><b>+ R$ 0,40</b></div><a href="game65.html" class="btn" style="background:var(--accent)">JOGAR</a></div>
+
+        <div class="ad-container">
+            <div id="container-dd67faf43ae614125e2514fd79f215d3"></div>
+        </div>
+
+        <div class="task"><div class="task-info"><strong>VÍDEO #66</strong><br><small>Assista 30s</small><b>+ R$ 0,50</b></div><button class="btn" onclick="executarMissao(this, 'video66.html', 0.50, 30000)">INICIAR</button></div>
+        <div class="task"><div class="task-info"><strong>BAIXAR APP #67</strong><br><small>Instalação Direta</small><b>+ R$ 4,50</b></div><button class="btn" onclick="executarMissao(this, 'app67.html', 4.50, 5000)">INICIAR</button></div>
+        <div class="task"><div class="task-info"><strong>MISSÃO #68</strong><br><small>Link de Tarefa</small><b>+ R$ 1,00</b></div><button class="btn" onclick="executarMissao(this, 'link68.html', 1.00, 5000)">INICIAR</button></div>
+        <div class="task"><div class="task-info"><strong>MISSÃO #69</strong><br><small>Link de Tarefa</small><b>+ R$ 1,00</b></div><button class="btn" onclick="executarMissao(this, 'link69.html', 1.00, 5000)">INICIAR</button></div>
+        <div class="task" style="border: 1px solid var(--accent);"><div class="task-info"><strong>#GAME #70</strong><br><small>Ludo Star</small><b>+ R$ 0,40</b></div><a href="game70.html" class="btn" style="background:var(--accent)">JOGAR</a></div>
+
+        <div class="task"><div class="task-info"><strong>VÍDEO #71</strong><br><small>Assista 30s</small><b>+ R$ 0,50</b></div><button class="btn" onclick="executarMissao(this, 'video71.html', 0.50, 30000)">INICIAR</button></div>
+        <div class="task"><div class="task-info"><strong>INSTAGRAM</strong><br><small>Curtir Foto</small><b>+ R$ 0,50</b></div><button class="btn" onclick="executarMissao(this, 'insta-curtir.html', 0.50, 5000)">INICIAR</button></div>
+        <div class="task"><div class="task-info"><strong>MISSÃO #73</strong><br><small>Link de Tarefa</small><b>+ R$ 1,00</b></div><button class="btn" onclick="executarMissao(this, 'link73.html', 1.00, 5000)">INICIAR</button></div>
+        <div class="task"><div class="task-info"><strong>MISSÃO #74</strong><br><small>Link de Tarefa</small><b>+ R$ 1,00</b></div><button class="btn" onclick="executarMissao(this, 'link74.html', 1.00, 5000)">INICIAR</button></div>
+        <div class="task" style="border: 1px solid var(--accent);"><div class="task-info"><strong>#GAME #75</strong><br><small>Flappy Bird 2</small><b>+ R$ 0,40</b></div><a href="game75.html" class="btn" style="background:var(--accent)">JOGAR</a></div>
+
+        <div class="ad-container">
+            <div id="container-dd67faf43ae614125e2514fd79f215d3"></div>
+        </div>
+
+        <div class="task"><div class="task-info"><strong>VÍDEO #76</strong><br><small>Assista 30s</small><b>+ R$ 0,50</b></div><button class="btn" onclick="executarMissao(this, 'video76.html', 0.50, 30000)">INICIAR</button></div>
+        <div class="task"><div class="task-info"><strong>BAIXAR APP #77</strong><br><small>Instalação Direta</small><b>+ R$ 4,50</b></div><button class="btn" onclick="executarMissao(this, 'app77.html', 4.50, 5000)">INICIAR</button></div>
+        <div class="task"><div class="task-info"><strong>MISSÃO #78</strong><br><small>Link de Tarefa</small><b>+ R$ 1,00</b></div><button class="btn" onclick="executarMissao(this, 'link78.html', 1.00, 5000)">INICIAR</button></div>
+        <div class="task"><div class="task-info"><strong>MISSÃO #79</strong><br><small>Link de Tarefa</small><b>+ R$ 1,00</b></div><button class="btn" onclick="executarMissao(this, 'link79.html', 1.00, 5000)">INICIAR</button></div>
+        <div class="task" style="border: 1px solid var(--accent);"><div class="task-info"><strong>#GAME #80</strong><br><small>2048 Puzzle</small><b>+ R$ 0,40</b></div><a href="game80.html" class="btn" style="background:var(--accent)">JOGAR</a></div>
+
+        <div class="ad-container">
+            <div id="container-dd67faf43ae614125e2514fd79f215d3"></div>
+        </div>
+
+        <div class="task"><div class="task-info"><strong>VÍDEO #81</strong><br><small>Assista 30s</small><b>+ R$ 0,50</b></div><button class="btn" onclick="executarMissao(this, 'video81.html', 0.50, 30000)">INICIAR</button></div>
+        <div class="task"><div class="task-info"><strong>INSTAGRAM</strong><br><small>Seguir Perfil 2</small><b>+ R$ 1,50</b></div><button class="btn" onclick="executarMissao(this, 'insta2.html', 1.50, 5000)">INICIAR</button></div>
+        <div class="task"><div class="task-info"><strong>MISSÃO #83</strong><br><small>Link de Tarefa</small><b>+ R$ 1,00</b></div><button class="btn" onclick="executarMissao(this, 'link83.html', 1.00, 5000)">INICIAR</button></div>
+        <div class="task"><div class="task-info"><strong>MISSÃO #84</strong><br><small>Link de Tarefa</small><b>+ R$ 1,00</b></div><button class="btn" onclick="executarMissao(this, 'link84.html', 1.00, 5000)">INICIAR</button></div>
+        <div class="task" style="border: 1px solid var(--accent);"><div class="task-info"><strong>#GAME #85</strong><br><small>Memory Game</small><b>+ R$ 0,40</b></div><a href="game85.html" class="btn" style="background:var(--accent)">JOGAR</a></div>
+
+        <div class="ad-container">
+            <div id="container-dd67faf43ae614125e2514fd79f215d3"></div>
+        </div>
+
+        <div class="task"><div class="task-info"><strong>VÍDEO #86</strong><br><small>Assista 30s</small><b>+ R$ 0,50</b></div><button class="btn" onclick="executarMissao(this, 'video86.html', 0.50, 30000)">INICIAR</button></div>
+        <div class="task"><div class="task-info"><strong>BAIXAR APP #87</strong><br><small>Instalação Direta</small><b>+ R$ 4,50</b></div><button class="btn" onclick="executarMissao(this, 'app87.html', 4.50, 5000)">INICIAR</button></div>
+        <div class="task"><div class="task-info"><strong>MISSÃO #88</strong><br><small>Link de Tarefa</small><b>+ R$ 1,00</b></div><button class="btn" onclick="executarMissao(this, 'link88.html', 1.00, 5000)">INICIAR</button></div>
+        <div class="task"><div class="task-info"><strong>MISSÃO #89</strong><br><small>Link de Tarefa</small><b>+ R$ 1,00</b></div><button class="btn" onclick="executarMissao(this, 'link89.html', 1.00, 5000)">INICIAR</button></div>
+        <div class="task" style="border: 1px solid var(--accent);"><div class="task-info"><strong>#GAME #90</strong><br><small>Damas Pro</small><b>+ R$ 0,40</b></div><a href="game90.html" class="btn" style="background:var(--accent)">JOGAR</a></div>
+
+        <div class="ad-container">
+            <div id="container-dd67faf43ae614125e2514fd79f215d3"></div>
+        </div>
+
+        <div class="task"><div class="task-info"><strong>VÍDEO #91</strong><br><small>Assista 30s</small><b>+ R$ 0,50</b></div><button class="btn" onclick="executarMissao(this, 'video91.html', 0.50, 30000)">INICIAR</button></div>
+        <div class="task"><div class="task-info"><strong>BAIXAR APP #92</strong><br><small>Instalação Direta</small><b>+ R$ 4,50</b></div><button class="btn" onclick="executarMissao(this, 'app92.html', 4.50, 5000)">INICIAR</button></div>
+        <div class="task"><div class="task-info"><strong>MISSÃO #93</strong><br><small>Link de Tarefa</small><b>+ R$ 1,00</b></div><button class="btn" onclick="executarMissao(this, 'link93.html', 1.00, 5000)">INICIAR</button></div>
+        <div class="task"><div class="task-info"><strong>MISSÃO #94</strong><br><small>Link de Tarefa</small><b>+ R$ 1,00</b></div><button class="btn" onclick="executarMissao(this, 'link94.html', 1.00, 5000)">INICIAR</button></div>
+        <div class="task" style="border: 1px solid var(--accent);"><div class="task-info"><strong>#GAME #95</strong><br><small>Sinuca 8 Ball</small><b>+ R$ 0,40</b></div><a href="game95.html" class="btn" style="background:var(--accent)">JOGAR</a></div>
+
+        <div class="ad-container">
+            <div id="container-dd67faf43ae614125e2514fd79f215d3"></div>
+        </div>
+
+        <div class="task"><div class="task-info"><strong>VÍDEO #96</strong><br><small>Assista 30s</small><b>+ R$ 0,50</b></div><button class="btn" onclick="executarMissao(this, 'video96.html', 0.50, 30000)">INICIAR</button></div>
+        <div class="task"><div class="task-info"><strong>BAIXAR APP #97</strong><br><small>Instalação Direta</small><b>+ R$ 4,50</b></div><button class="btn" onclick="executarMissao(this, 'app97.html', 4.50, 5000)">INICIAR</button></div>
+        <div class="task"><div class="task-info"><strong>MISSÃO #98</strong><br><small>Link de Tarefa</small><b>+ R$ 1,00</b></div><button class="btn" onclick="executarMissao(this, 'link98.html', 1.00, 5000)">INICIAR</button></div>
+        <div class="task"><div class="task-info"><strong>MISSÃO #99</strong><br><small>Link de Tarefa</small><b>+ R$ 1,00</b></div><button class="btn" onclick="executarMissao(this, 'link99.html', 1.00, 5000)">INICIAR</button></div>
+        <div class="task" style="border: 1px solid var(--accent);"><div class="task-info"><strong>#GAME #100</strong><br><small>Aventura Ninja</small><b>+ R$ 0,40</b></div><a href="game100.html" class="btn" style="background:var(--accent)">JOGAR</a></div>
+
+        <div class="ad-container">
+            <div id="container-dd67faf43ae614125e2514fd79f215d3"></div>
+        </div>
+
+        <div class="task"><div class="task-info"><strong>VÍDEO FINAL #101</strong><br><small>Assista 30s</small><b>+ R$ 1,00</b></div><button class="btn" onclick="executarMissao(this, 'video101.html', 1.00, 30000)">INICIAR</button></div>
+        <div class="task"><div class="task-info"><strong>SUPER MISSÃO</strong><br><small>Cadastro VIP</small><b>+ R$ 5,00</b></div><button class="btn" onclick="executarMissao(this, 'vip.html', 5.00, 5000)">INICIAR</button></div>
+        <div class="task"><div class="task-info"><strong>CPAGRIP</strong><br><small>Verificação Humana</small><b>+ R$ 2,50</b></div><button class="btn" onclick="executarMissao(this, 'cpagrip.html', 2.50, 5000)">INICIAR</button></div>
+        <div class="task"><div class="task-info"><strong>SITE PARCEIRO</strong><br><small>Navegar 1 min</small><b>+ R$ 0,80</b></div><button class="btn" onclick="executarMissao(this, 'parceiro.html', 0.80, 60000)">INICIAR</button></div>
+        <div class="task" style="border: 2px solid var(--primary);"><div class="task-info"><strong>MISSAO 105 🏆</strong><br><small>Bônus de Conclusão</small><b>+ R$ 10,00</b></div><button class="btn" onclick="executarMissao(this, 'conclusao.html', 10.00, 5000)">RESGATAR</button></div>
+
+        </div>
+
+        </div>
+
+    <div class="nav">
+        <a href="index.html" style="color:var(--primary)"><img src="https://i.ibb.co/rKxdd5Cy/missao.png">Missões</a>
+        <a href="indicar.html"><img src="https://i.ibb.co/MydkMrn7/amigo.png">Indicar</a>
+        <a href="suporte.html"><img src="https://i.ibb.co/n8ZdnnVb/suporte-tecnico-1.png">Suporte</a>
+        <a href="saque-pix.html"><img src="https://i.ibb.co/kgyQrPq6/bolsa-de-dinheiro.png">Sacar</a>
+    </div>
+
+    <script>
+        // LOGICA DE PERSISTENCIA MANTIDA
+        let saldoLocal = parseFloat(localStorage.getItem('saldo_atual')) || 0;
+        const nomeSalvo = localStorage.getItem('user_name') || "Diogo";
+        document.getElementById('user-display').innerText = `Olá, ${nomeSalvo}!`;
+
+        function atualizarInterfaceSaldo() {
+            document.getElementById('saldo').innerText = `R$ ${saldoLocal.toFixed(2).replace('.', ',')}`;
+        }
+
+        function verificarNotificacao() {
+            const hoje = new Date().toLocaleDateString();
+            if (localStorage.getItem('ultimo_checkin') !== hoje) {
+                document.getElementById('dot').style.display = 'block';
+            } else {
+                document.getElementById('dot').style.display = 'none';
+            }
+        }
+
+        function toggleLang() {
+            const menu = document.getElementById('lang-menu');
+            menu.style.display = (menu.style.display === 'block') ? 'none' : 'block';
+        }
+
+        function abrirCheckin() { document.getElementById('modal-checkin').style.display = 'flex'; }
+
+        function realizarCheckin() {
+            const hoje = new Date().toLocaleDateString();
+            if (localStorage.getItem('ultimo_checkin') === hoje) {
+                alert("Você já resgatou seu bônus hoje!");
+            } else {
+                saldoLocal += 2.50; // R$ 2,00 + R$ 0,50 do ML
+                localStorage.setItem('saldo_atual', saldoLocal);
+                localStorage.setItem('ultimo_checkin', hoje);
+                atualizarInterfaceSaldo();
+                document.getElementById('dot').style.display = 'none';
+                window.open('https://mercadolivre.com.br', '_blank'); // Abre o ML para garantir o cookie
+                alert("Bônus de R$ 2,50 adicionado!");
+            }
+            document.getElementById('modal-checkin').style.display = 'none';
+        }
+
+        function executarMissao(btn, link, valor, tempo) {
+            btn.disabled = true; btn.innerText = "VALIDANDO...";
+            setTimeout(() => {
+                saldoLocal += valor;
+                localStorage.setItem('saldo_atual', saldoLocal);
+                atualizarInterfaceSaldo();
+                btn.innerText = "CONCLUÍDO ✅";
+                window.open(link, '_blank');
+            }, tempo);
+        }
+
+        window.onload = () => { atualizarInterfaceSaldo(); verificarNotificacao(); };
+    </script>
 </body>
 </html>
