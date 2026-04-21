@@ -8,37 +8,42 @@
     <link rel="icon" type="image/png" href="https://i.ibb.co/KcJjFWFv/Polish-20260420-144050885.png">
 
     <style>
-        /* [SEU CSS MANTIDO INTEGRALMENTE] */
         * { box-sizing: border-box; } 
         :root { --bg-deep: #0f111a; --bg-card: #171a26; --primary: #00e676; --accent: #ff9100; --text: #ffffff; --border: #2d313d; }
         body { font-family: 'Inter', sans-serif; background: var(--bg-deep); color: var(--text); margin: 0; padding-bottom: 100px; overflow-x: hidden; width: 100%; }
+        
         .header { background: rgba(23,26,38,0.95); padding: 0 20px; border-bottom: 1px solid var(--border); position: fixed; top: 0; width: 100%; z-index: 100; backdrop-filter: blur(10px); display: flex; justify-content: space-between; align-items: center; height: 80px; }
         #user-display { color:var(--primary); font-weight: 900; font-size: 1.5rem; }
+        
         .user-area { display: flex; align-items: center; gap: 8px; position: relative; }
         .flag-icon { width: 24px; height: 18px; object-fit: cover; border-radius: 2px; border: 1px solid rgba(255,255,255,0.2); cursor: pointer; }
+        
         .lang-menu { display: none; position: absolute; top: 35px; right: 0; background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; padding: 10px; width: 130px; z-index: 500; box-shadow: 0 10px 25px rgba(0,0,0,0.5); }
         .lang-option { display: flex; align-items: center; gap: 10px; padding: 8px; font-size: 0.8rem; color: #ccc; transition: 0.2s; }
-        .lang-option:hover { color: var(--primary); background: rgba(255,255,255,0.05); border-radius: 5px; }
+        
         .bell-btn { background: none; border: none; cursor: pointer; position: relative; display: flex; align-items: center; }
         .bell-btn img { width: 45px; height: 45px; }
         .notification-dot { position: absolute; top: 5px; right: 5px; width: 12px; height: 12px; background: #ff4444; border-radius: 50%; display: none; border: 2px solid var(--bg-deep); box-shadow: 0 0 8px #ff4444; }
+        
         .balance-box { margin-top: 100px; padding: 20px; }
         .card { background: var(--bg-card); border-radius: 16px; border: 1px solid var(--border); padding: 20px; text-align: center; }
         .balance-val { font-size: 2.8rem; color: var(--primary); font-weight: 800; margin: 5px 0; }
         .promo-banner { width: 100%; border-radius: 12px; margin-top: 15px; border: 1px solid var(--border); }
+        
         .invite-alert { background: linear-gradient(135deg, #1a1d2e 0%, #004d28 100%); border: 2px solid var(--primary); border-radius: 16px; margin: 0 20px 20px 20px; padding: 15px; display: flex; align-items: center; gap: 15px; cursor: pointer; animation: pulse 2s infinite; }
         @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(0, 230, 118, 0.4); } 70% { box-shadow: 0 0 0 10px rgba(0, 230, 118, 0); } 100% { box-shadow: 0 0 0 0 rgba(0, 230, 118, 0); } }
-        .invite-icon { font-size: 2rem; }
-        .invite-txt b { color: var(--primary); font-size: 1.1rem; }
-        .invite-txt p { margin: 3px 0 0 0; font-size: 0.85rem; color: #b0b3b8; }
+        
         .section-title { border-left: 5px solid var(--primary); padding-left: 12px; margin: 25px 20px; font-size: 1.3rem; font-weight: 800; }
         .task-list { padding: 0 20px; }
         .task { background: var(--bg-card); border: 1px solid var(--border); padding: 18px; border-radius: 15px; margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center; }
         .task-info b { color: var(--primary); font-size: 1rem; display: block; margin-top: 4px; }
+        
         .btn { background: var(--primary); color: #000; border: none; padding: 12px 22px; border-radius: 10px; font-weight: 900; cursor: pointer; text-decoration: none; font-size: 0.85rem; text-transform: uppercase; }
         .btn:disabled { background: #2d313d !important; color: #888 !important; cursor: not-allowed; }
+        
         .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 2000; justify-content: center; align-items: center; }
         .modal-content { background: var(--bg-card); padding: 35px; border-radius: 25px; text-align: center; border: 1px solid var(--primary); width: 85%; max-width: 400px; }
+        
         .nav { position: fixed; bottom: 0; left: 0; width: 100%; background: #0a0c12; display: flex; justify-content: space-around; padding: 12px 0; border-top: 1px solid var(--border); z-index: 1000; }
         .nav a { color: #b0b3b8; text-decoration: none; font-size: 0.75rem; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 6px; }
         .nav a img { width: 24px; height: 24px; }
@@ -54,7 +59,6 @@
             <div class="lang-menu" id="lang-menu">
                 <div class="lang-option" onclick="toggleLang()"><img src="https://upload.wikimedia.org/wikipedia/commons/0/05/Flag_of_Brazil.svg" width="18"> Português</div>
                 <div class="lang-option" onclick="toggleLang()"><img src="https://upload.wikimedia.org/wikipedia/commons/a/a4/Flag_of_the_United_States.svg" width="18"> English (US)</div>
-                <div class="lang-option" onclick="toggleLang()"><img src="https://upload.wikimedia.org/wikipedia/commons/9/9a/Flag_of_Spain.svg" width="18"> Español</div>
             </div>
         </div>
         <button class="bell-btn" onclick="abrirCheckin()">
@@ -75,7 +79,7 @@
         <div class="card">
             <small style="letter-spacing:1px">SALDO TOTAL</small>
             <div class="balance-val" id="saldo">R$ 0,00</div>
-            <img src="https://i.ibb.co/BKvPQYkY/file-0000000085ac720eaa6f569cf3d931ac.png" class="promo-banner">
+            <img src="https://i.ibb.co/nMqgTPjH/Polish-20260420-135926686.png" class="promo-banner">
         </div>
     </div>
 
@@ -93,8 +97,33 @@
         <div class="task"><div class="task-info"><strong>VÍDEO #01</strong><br><small>Assista 30s</small><b>+ R$ 0,50</b></div><button class="btn" onclick="executarMissao(this, 'video1.html', 0.50, 30000, 'm1')">INICIAR</button></div>
         <div class="task"><div class="task-info"><strong>MISSÃO #02</strong><br><small>Link de Afiliado</small><b>+ R$ 1,20</b></div><button class="btn" onclick="executarMissao(this, 'afiliado.html', 1.20, 5000, 'm2')">INICIAR</button></div>
         <div class="task"><div class="task-info"><strong>BANCO INTER</strong><br><small>Indicar Amigo</small><b>+ R$ 25,00</b></div><button class="btn" onclick="executarMissao(this, 'inter.html', 25.00, 5000, 'm3')">INICIAR</button></div>
-        
-        </div>
+        <div class="task"><div class="task-info"><strong>AMAZON MUSIC</strong><br><small>Ouvir Playlist</small><b>+ R$ 2,00</b></div><button class="btn" onclick="executarMissao(this, 'amazon.html', 2.00, 5000, 'm4')">INICIAR</button></div>
+        <div class="task" style="border: 1px solid var(--accent);"><div class="task-info"><strong>#GAME #05</strong><br><small>Damas: 3 peças</small><b>+ R$ 0,50</b></div><button class="btn" style="background:var(--accent)" onclick="executarMissao(this, 'damas.html', 0.50, 5000, 'm5')">JOGAR</button></div>
+
+        <div class="ad-container"><div id="container-dd67faf43ae614125e2514fd79f215d3"></div></div>
+
+        <div class="task"><div class="task-info"><strong>VÍDEO #06</strong><br><small>Assista 30s</small><b>+ R$ 0,50</b></div><button class="btn" onclick="executarMissao(this, 'video6.html', 0.50, 30000, 'm6')">INICIAR</button></div>
+        <div class="task"><div class="task-info"><strong>INSTAGRAM</strong><br><small>Seguir Perfil</small><b>+ R$ 1,50</b></div><button class="btn" onclick="executarMissao(this, 'insta.html', 1.50, 5000, 'm7')">INICIAR</button></div>
+        <div class="task"><div class="task-info"><strong>BANCO DIGIO</strong><br><small>Indicar Conta</small><b>+ R$ 10,00</b></div><button class="btn" onclick="executarMissao(this, 'digio.html', 10.00, 5000, 'm8')">INICIAR</button></div>
+        <div class="task"><div class="task-info"><strong>PRIME VIDEO</strong><br><small>Assinar Teste</small><b>+ R$ 5,00</b></div><button class="btn" onclick="executarMissao(this, 'prime.html', 5.00, 5000, 'm9')">INICIAR</button></div>
+        <div class="task" style="border: 1px solid var(--accent);"><div class="task-info"><strong>#GAME #10</strong><br><small>Labirinto</small><b>+ R$ 0,40</b></div><button class="btn" style="background:var(--accent)" onclick="executarMissao(this, 'game10.html', 0.40, 5000, 'm10')">JOGAR</button></div>
+
+        <div class="ad-container"><div id="container-dd67faf43ae614125e2514fd79f215d3"></div></div>
+
+        <div class="task"><div class="task-info"><strong>VÍDEO #11</strong><br><small>Assista 30s</small><b>+ R$ 0,50</b></div><button class="btn" onclick="executarMissao(this, 'video11.html', 0.50, 30000, 'm11')">INICIAR</button></div>
+        <div class="task" style="border-left: 5px solid #fff;"><div class="task-info"><strong>MAQUININHA TON</strong><br><small>Comprar/Indicar</small><b>+ R$ 150,00</b></div><button class="btn" onclick="executarMissao(this, 'ton.html', 150.00, 5000, 'm12')">INICIAR</button></div>
+        <div class="task"><div class="task-info"><strong>MERCADO LIVRE</strong><br><small>Visitar Loja</small><b>+ R$ 0,50</b></div><button class="btn" onclick="executarMissao(this, 'mercadolivre.html', 0.50, 5000, 'm13')">INICIAR</button></div>
+        <div class="task"><div class="task-info"><strong>AMAZON BEBÊ</strong><br><small>Lista de Enxoval</small><b>+ R$ 1,50</b></div><button class="btn" onclick="executarMissao(this, 'amazon-bebe.html', 1.50, 5000, 'm14')">INICIAR</button></div>
+        <div class="task" style="border: 1px solid var(--accent);"><div class="task-info"><strong>#GAME #15</strong><br><small>Torre de Blocos</small><b>+ R$ 0,40</b></div><button class="btn" style="background:var(--accent)" onclick="executarMissao(this, 'game15.html', 0.40, 5000, 'm15')">JOGAR</button></div>
+
+        <div class="ad-container"><div id="container-dd67faf43ae614125e2514fd79f215d3"></div></div>
+
+        <div class="task"><div class="task-info"><strong>VÍDEO #16</strong><br><small>Assista 30s</small><b>+ R$ 0,50</b></div><button class="btn" onclick="executarMissao(this, 'video16.html', 0.50, 30000, 'm16')">INICIAR</button></div>
+        <div class="task"><div class="task-info"><strong>APP PICPAY</strong><br><small>Baixar e Criar Conta</small><b>+ R$ 10,00</b></div><button class="btn" onclick="executarMissao(this, 'picpay.html', 10.00, 5000, 'm17')">INICIAR</button></div>
+        <div class="task"><div class="task-info"><strong>SHOPEE</strong><br><small>Ofertas do Dia</small><b>+ R$ 0,50</b></div><button class="btn" onclick="executarMissao(this, 'shopee.html', 0.50, 5000, 'm18')">INICIAR</button></div>
+        <div class="task"><div class="task-info"><strong>TIKTOK / KINDLE</strong><br><small>Assinar/Baixar</small><b>+ R$ 4,00</b></div><button class="btn" onclick="executarMissao(this, 'tiktok-kindle.html', 4.00, 5000, 'm19')">INICIAR</button></div>
+        <div class="task" style="border: 1px solid var(--accent);"><div class="task-info"><strong>#GAME #20</strong><br><small>Flappy Bird</small><b>+ R$ 0,40</b></div><button class="btn" style="background:var(--accent)" onclick="executarMissao(this, 'game20.html', 0.40, 5000, 'm20')">JOGAR</button></div>
+    </div>
 
     <div class="nav">
         <a href="index.html" style="color:var(--primary)"><img src="https://i.ibb.co/rKxdd5Cy/missao.png">Missões</a>
@@ -104,18 +133,14 @@
     </div>
 
     <script>
-        // LÓGICA DE PERSISTÊNCIA REAL
         let saldoLocal = parseFloat(localStorage.getItem('saldo_atual')) || 0;
         let missoesConcluidas = JSON.parse(localStorage.getItem('missoes_feitas')) || [];
         const nomeSalvo = localStorage.getItem('user_name') || "Usuário";
         
-        // Atualiza o nome dinamicamente
         document.getElementById('user-display').innerText = `Olá, ${nomeSalvo}!`;
 
         function atualizarInterface() {
             document.getElementById('saldo').innerText = `R$ ${saldoLocal.toFixed(2).replace('.', ',')}`;
-            
-            // Trava as missões que já foram feitas
             const botoes = document.querySelectorAll('.btn');
             botoes.forEach(btn => {
                 const onclickAttr = btn.getAttribute('onclick');
@@ -155,17 +180,13 @@
 
         function executarMissao(btn, link, valor, tempo, idMissao) {
             if(btn.disabled) return;
-            
             btn.disabled = true; 
             btn.innerText = "VALIDANDO...";
-
             setTimeout(() => {
                 saldoLocal += valor;
                 missoesConcluidas.push(idMissao);
-                
                 localStorage.setItem('saldo_atual', saldoLocal);
                 localStorage.setItem('missoes_feitas', JSON.stringify(missoesConcluidas));
-                
                 atualizarInterface();
                 window.open(link, '_blank');
             }, tempo);
