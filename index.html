@@ -3,58 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Missão Play7 - Spotify</title>
     <style>
-        body { background-color: #0d0d0d; color: #ffffff; font-family: 'Segoe UI', sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
-        .container { background: #181818; padding: 25px; border-radius: 20px; border: 1px solid #333; width: 90%; max-width: 400px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-        .timer { font-size: 32px; font-weight: bold; color: #1DB954; margin: 20px 0; }
-        .btn-play7 { background: #333; color: #777; border: none; padding: 15px 30px; border-radius: 30px; font-weight: bold; width: 100%; cursor: not-allowed; transition: 0.3s; }
-        .btn-active { background: #1DB954; color: white; cursor: pointer; box-shadow: 0 0 15px rgba(29, 185, 84, 0.4); }
+        body { background-color: #000; color: white; font-family: sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+        .card { width: 95%; max-width: 400px; background: #121212; padding: 20px; border-radius: 15px; border: 1px solid #333; text-align: center; }
+        .timer { font-size: 30px; font-weight: bold; color: #1DB954; margin: 15px 0; }
+        .btn-play7 { width: 100%; padding: 15px; border-radius: 30px; border: none; font-weight: bold; background: #333; color: #777; cursor: not-allowed; transition: 0.3s; }
+        .btn-active { background: #1DB954; color: white; cursor: pointer; }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <h2 style="font-size: 18px; margin-bottom: 20px;">🎧 Missão: Ouça para ganhar!</h2>
-    
+<div class="card">
+    <h3 style="margin-bottom: 15px;">Missão: Ouça "Blue Sky Horizon"</h3>
+
     <iframe 
-      style="border-radius:12px; margin-bottom: 10px;" 
-      src="https://open.spotify.com/embed/track/3036j0FisU9UatwH8U1m6t?utm_source=generator&theme=0" 
-      width="100%" 
-      height="152" 
-      frameBorder="0" 
-      allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
-      loading="lazy">
+        style="border-radius:12px" 
+        src="https://open.spotify.com/embed/track/3036j0FisU9UatwH8U1m6t?utm_source=generator&theme=0" 
+        width="100%" 
+        height="152" 
+        frameBorder="0" 
+        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
+        loading="lazy">
     </iframe>
 
     <div class="timer" id="countdown">90s</div>
-    <p id="instruction" style="color: #aaa; font-size: 14px;">Ouça a música até o cronômetro zerar.</p>
+    <p id="msg" style="font-size: 14px; color: #aaa;">Ouça a música para liberar os pontos.</p>
     
     <button id="claimBtn" class="btn-play7" disabled>AGUARDE...</button>
 </div>
 
 <script>
-    let timeLeft = 90; // Tempo em segundos (1min 30s)
-    const countdownEl = document.getElementById('countdown');
-    const claimBtn = document.getElementById('claimBtn');
+    let timeLeft = 90;
+    const timerEl = document.getElementById('countdown');
+    const btnEl = document.getElementById('claimBtn');
 
     const timer = setInterval(() => {
         timeLeft--;
-        countdownEl.innerText = timeLeft + "s";
+        timerEl.innerText = timeLeft + "s";
 
         if (timeLeft <= 0) {
             clearInterval(timer);
-            countdownEl.style.display = "none";
-            document.getElementById('instruction').innerText = "Missão concluída!";
-            claimBtn.disabled = false;
-            claimBtn.innerText = "RESGATAR RECOMPENSA";
-            claimBtn.classList.add('btn-active');
+            timerEl.style.display = "none";
+            document.getElementById('msg').innerText = "Missão concluída!";
+            btnEl.disabled = false;
+            btnEl.innerText = "RESGATAR RECOMPENSA";
+            btnEl.classList.add('btn-active');
         }
     }, 1000);
 
-    claimBtn.onclick = () => {
-        // Altere para o link da Play7 que dá os pontos
-        window.location.href = "https://www.play7oficial.com/dashboard";
+    btnEl.onclick = () => {
+        window.location.href = "https://www.play7oficial.com";
     };
 </script>
 
