@@ -3,19 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Missão Play7</title>
     <style>
-        body { background-color: #000; color: white; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-        .mission-container { max-width: 450px; margin: 50px auto; padding: 20px; border: 1px solid #333; border-radius: 15px; background: #121212; text-align: center; }
-        .timer-badge { font-size: 24px; font-weight: bold; color: #1DB954; margin: 15px 0; }
-        .btn-play7 { width: 100%; padding: 15px; border-radius: 30px; border: none; font-weight: bold; cursor: not-allowed; background-color: #333; color: #777; transition: 0.3s; }
-        .btn-active { background-color: #1DB954 ! loosening; color: white; cursor: pointer; }
+        body { background-color: #000; color: white; font-family: sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+        .card { width: 90%; max-width: 400px; background: #121212; padding: 20px; border-radius: 15px; border: 1px solid #333; text-align: center; }
+        .timer { font-size: 32px; font-weight: bold; color: #1DB954; margin: 20px 0; }
+        .btn { width: 100%; padding: 15px; border-radius: 30px; border: none; font-weight: bold; transition: 0.3s; background: #333; color: #777; cursor: not-allowed; }
+        .btn-ready { background: #1DB954; color: white; cursor: pointer; }
     </style>
 </head>
 <body>
 
-<div class="mission-container">
-    <h3 style="margin-bottom: 20px;">Missão: Ouça "Blue Sky Horizon"</h3>
-    
+<div class="card">
+    <h3 style="margin-top:0">Missão: Ouça "Blue Sky Horizon"</h3>
+
     <iframe 
         style="border-radius:12px" 
         src="https://open.spotify.com/embed/track/3036j0FisU9UatwH8U1m6t?utm_source=generator&theme=0" 
@@ -26,35 +27,35 @@
         loading="lazy">
     </iframe>
 
-    <div class="timer-badge" id="countdown">90s</div>
-    <p id="instruction">Aguarde o tempo terminar para coletar seus pontos.</p>
+    <div class="timer" id="tempo">90s</div>
+    <p id="instrucao" style="font-size: 14px; color: #aaa;">O tempo está correndo! Ouça a música.</p>
     
-    <button id="claimBtn" class="btn-play7" disabled>AGUARDE...</button>
+    <button id="btnResgatar" class="btn" disabled>AGUARDE...</button>
 </div>
 
 <script>
-    let timeLeft = 90;
-    const countdownEl = document.getElementById('countdown');
-    const claimBtn = document.getElementById('claimBtn');
-    const instruction = document.getElementById('instruction');
+    let segundos = 90;
+    const campoTempo = document.getElementById('tempo');
+    const campoInstrucao = document.getElementById('instrucao');
+    const botao = document.getElementById('btnResgatar');
 
-    const timer = setInterval(() => {
-        timeLeft--;
-        countdownEl.innerText = timeLeft + "s";
+    const cronometro = setInterval(() => {
+        segundos--;
+        campoTempo.innerText = segundos + "s";
 
-        if (timeLeft <= 0) {
-            clearInterval(timer);
-            countdownEl.style.display = "none";
-            instruction.innerText = "Parabéns! Missão concluída.";
-            claimBtn.disabled = false;
-            claimBtn.innerText = "RESGATAR RECOMPENSA";
-            claimBtn.classList.add('btn-active');
+        if (segundos <= 0) {
+            clearInterval(cronometro);
+            campoTempo.style.display = "none";
+            campoInstrucao.innerText = "Missão concluída com sucesso!";
+            botao.disabled = false;
+            botao.innerText = "RESGATAR PONTOS";
+            botao.classList.add('btn-ready');
         }
     }, 1000);
 
-    claimBtn.onclick = () => {
-        // Aqui você coloca o link para onde o usuário vai após ganhar
-        window.location.href = "https://www.play7oficial.com/dashboard";
+    botao.onclick = () => {
+        alert("Pontos resgatados!");
+        window.location.href = "https://www.play7oficial.com";
     };
 </script>
 
