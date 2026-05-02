@@ -1,1 +1,73 @@
-<iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/album/2O1sBRK2eQdaDdwHlDLzsV?utm_source=generator&theme=0" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body { background: #000; color: #fff; font-family: sans-serif; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; }
+        .box-play7 { width: 90%; max-width: 400px; background: #121212; padding: 20px; border-radius: 15px; border: 1px solid #333; text-align: center; border-left: 4px solid #1DB954; }
+        .timer { font-size: 38px; font-weight: bold; color: #1DB954; margin: 15px 0; }
+        .btn-lock { width: 100%; padding: 15px; border-radius: 30px; border: none; background: #333; color: #777; font-weight: bold; cursor: not-allowed; }
+        .btn-win { background: #1DB954 !important; color: #fff !important; cursor: pointer !important; box-shadow: 0 0 15px rgba(29, 185, 84, 0.4); }
+    </style>
+</head>
+<body>
+
+<div class="box-play7">
+    <h3 style="margin-top:0">🎧 Missão Play7</h3>
+    <p style="font-size: 13px; color: #888;">Dê o play abaixo para iniciar o tempo!</p>
+
+    <div id="meu-player-spotify"></div>
+
+    <div class="timer" id="cronometro">90s</div>
+    <button id="btnFinal" class="btn-lock" disabled>AGUARDE O PLAY...</button>
+</div>
+
+<script src="https://open.spotify.com/embed/iframe-api/v1" async></script>
+
+<script>
+    let tempoRestante = 90;
+    let iniciado = false;
+
+    // Configuração oficial da API do Spotify
+    window.onSpotifyIframeApiReady = (IFrameAPI) => {
+        const element = document.getElementById('meu-player-spotify');
+        const options = {
+            width: '100%',
+            height: '152', // Tamanho ideal para mobile
+            uri: 'spotify:track:3036j0FisU9UatwH8U1m6t' // ID da sua música: Horizonte do Céu Azul
+        };
+
+        IFrameAPI.createController(element, options, (EmbedController) => {
+            // ESSA É A MÁGICA: Deteta quando o play é apertado
+            EmbedController.on('playback_update', e => {
+                if (e.data.isPaused === false && !iniciado) {
+                    começarContagem();
+                    iniciado = true;
+                }
+            });
+        });
+    };
+
+    function começarContagem() {
+        const display = document.getElementById('cronometro');
+        const botao = document.getElementById('btnFinal');
+        botao.innerText = "OUVINDO MÚSICA...";
+
+        const contagem = setInterval(() => {
+            tempoRestante--;
+            display.innerText = tempoRestante + "s";
+
+            if (tempoRestante <= 0) {
+                clearInterval(contagem);
+                display.style.display = "none";
+                botao.disabled = false;
+                botao.innerText = "RESGATAR PONTOS";
+                botao.classList.add('btn-win');
+            }
+        }, 1000);
+    }
+</script>
+
+</body>
+</html>
