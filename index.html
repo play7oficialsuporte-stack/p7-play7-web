@@ -3,77 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Missão Play7 | Horizonte do Céu Azul</title>
+    <title>Missão Play7</title>
     <style>
-        body { background-color: #000; color: #fff; font-family: 'Segoe UI', Tahoma, sans-serif; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; }
-        .card-missao { width: 90%; max-width: 450px; background: #121212; border: 1px solid #333; border-left: 5px solid #1DB954; padding: 25px; border-radius: 15px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-        .timer-box { font-size: 35px; font-weight: bold; color: #1DB954; margin: 20px 0; letter-spacing: 2px; }
-        .btn-resgatar { width: 100%; padding: 15px; border-radius: 30px; border: none; font-weight: bold; font-size: 16px; background: #333; color: #777; cursor: not-allowed; transition: 0.3s; text-transform: uppercase; }
-        .btn-ready { background: #1DB954 !important; color: white !important; cursor: pointer !important; box-shadow: 0 0 15px rgba(29, 185, 84, 0.4); }
-        #spotify-player { margin-bottom: 15px; min-height: 152px; }
+        body { background-color: #000; color: #fff; font-family: sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+        .card { width: 90%; max-width: 400px; background: #121212; padding: 25px; border-radius: 20px; border: 1px solid #333; border-left: 5px solid #1DB954; text-align: center; }
+        .timer { font-size: 35px; font-weight: bold; color: #1DB954; margin: 20px 0; }
+        .btn { width: 100%; padding: 15px; border-radius: 30px; border: none; font-weight: bold; background: #333; color: #777; cursor: not-allowed; transition: 0.3s; }
+        .btn-ready { background: #1DB954; color: white; cursor: pointer; box-shadow: 0 0 15px rgba(29, 185, 84, 0.4); }
     </style>
 </head>
 <body>
 
-<div class="card-missao">
-    <h3 style="margin-top: 0;">🎧 Missão Play7</h3>
-    <p style="color: #aaa; font-size: 14px;">Ouça "Horizonte do Céu Azul" para validar seus pontos.</p>
+<div class="card">
+    <h3 style="margin-top:0">🎧 Missão Play7</h3>
+    <p style="font-size: 14px; color: #aaa;">Ouça "Horizonte do Céu Azul" para validar seus pontos.</p>
 
-    <div id="spotify-player"></div>
+    <iframe 
+        style="border-radius:12px; margin-bottom: 15px;" 
+        src="https://open.spotify.com/embed/track/3036j0FisU9UatwH8U1m6t?utm_source=generator&theme=0" 
+        width="100%" 
+        height="152" 
+        frameBorder="0" 
+        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
+        loading="lazy">
+    </iframe>
 
-    <div class="timer-box" id="contador">90s</div>
-    
-    <button id="btnAcao" class="btn-resgatar" disabled>Aguarde o tempo...</button>
+    <div class="timer" id="tempo">90s</div>
+    <button id="btnResgatar" class="btn" disabled>AGUARDE O TEMPO...</button>
 </div>
 
-<script src="https://open.spotify.com/embed-iframe-api/v1" async></script>
-
 <script>
-    let tempoRestante = 90;
-    let cronometroIniciado = false;
+    let segundos = 90;
+    const campoTempo = document.getElementById('tempo');
+    const botao = document.getElementById('btnResgatar');
 
-    // Passo 2: Configurar o Player quando a API estiver pronta
-    window.onSpotifyIframeApiReady = (IFrameAPI) => {
-        const element = document.getElementById('spotify-player');
-        const options = {
-            width: '100%',
-            height: '152',
-            uri: 'spotify:track:3036j0FisU9UatwH8U1m6t' // Sua música: Horizonte do Céu Azul
-        };
-        
-        IFrameAPI.createController(element, options, (EmbedController) => {
-            // Opcional: Iniciar contador apenas quando derem play (muito mais seguro!)
-            EmbedController.on('playback_update', e => {
-                if (e.data.isPaused === false && !cronometroIniciado) {
-                    iniciarContagem();
-                    cronometroIniciado = true;
-                }
-            });
-        });
-    };
+    const cronometro = setInterval(() => {
+        segundos--;
+        campoTempo.innerText = segundos + "s";
 
-    function iniciarContagem() {
-        const display = document.getElementById('contador');
-        const botao = document.getElementById('btnAcao');
-
-        const intervalo = setInterval(() => {
-            tempoRestante--;
-            display.innerText = tempoRestante + "s";
-
-            if (tempoRestante <= 0) {
-                clearInterval(intervalo);
-                display.style.display = "none";
-                botao.disabled = false;
-                botao.innerText = "RESGATAR AGORA";
-                botao.classList.add('btn-ready');
-            }
-        }, 1000);
-    }
-
-    document.getElementById('btnAcao').onclick = () => {
-        if (!document.getElementById('btnAcao').disabled) {
-            window.location.href = "https://www.play7oficial.com"; 
+        if (segundos <= 0) {
+            clearInterval(cronometro);
+            campoTempo.style.display = "none";
+            botao.disabled = false;
+            botao.innerText = "RESGATAR PONTOS";
+            botao.classList.add('btn-ready');
         }
+    }, 1000);
+
+    botao.onclick = () => {
+        window.location.href = "https://www.play7oficial.com";
     };
 </script>
 
