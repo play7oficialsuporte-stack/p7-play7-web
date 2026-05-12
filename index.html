@@ -1,61 +1,263 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        body { background-color: #000; color: #fff; font-family: 'Segoe UI', sans-serif; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; }
-        .container { width: 90%; max-width: 400px; background: #121212; padding: 20px; border-radius: 15px; border: 1px solid #333; text-align: center; border-left: 4px solid #1DB954; }
-        .timer { font-size: 35px; font-weight: bold; color: #1DB954; margin: 15px 0; }
-        .btn-play7 { width: 100%; padding: 15px; border-radius: 30px; border: none; background: #333; color: #777; font-weight: bold; cursor: not-allowed; transition: 0.3s; }
-        .btn-active { background: #1DB954 !important; color: white !important; cursor: pointer !important; box-shadow: 0 0 15px rgba(29, 185, 84, 0.4); }
-    </style>
+<!-- 1. CÓDIGOS DE POPUNDER (ADSTERRA E POPADS) - SEMPRE NO HEAD -->
+<!-- Popunder Adsterra -->
+<script src="https://freelygreatestscammer.com/eb/67/c3/eb67c3eb4fe1bdab3f26b765b1922089.js"></script>
+
+<!-- Popunder PopAds -->
+<script type="text/javascript" data-cfasync="false">
+/<![CDATA[//
+(function(){var f=window,d="ab0cc14a36079466252147c4dea2de53",j=[["siteId",915*947+167+4428687],["minBid",0],["popundersPerIP","0"],["delayBetween",0],["default",false],["defaultPerDay",0],["topmostLayer","auto"]],p=["d3d3LmJsb2NrYWRzbm90LmNvbS9wei96anNtZWRpYXRhZ3MubWluLmpz","ZG5oZmk1bm4yZHQ2Ny5jbG91ZGZyb250Lm5ldC9zZy9XTGsveHR5cGVkLm1pbi5jc3M="],b=-1,a,c,i=function(){clearTimeout(c);b++;if(p[b]&&!(1804526049000<(new Date).getTime()&&1<b)){a=f.document.createElement("script");a.type="text/javascript";a.async=!0;var o=f.document.getElementsByTagName("script")[0];a.src="https://"+atob(p[b]);a.crossOrigin="anonymous";a.onerror=i;a.onload=function(){clearTimeout(c);f[d.slice(0,16)+d.slice(0,16)]||i()};c=setTimeout(i,5E3);o.parentNode.insertBefore(a,o)}};if(!f[d]){try{Object.freeze(f[d]=j)}catch(e){}i()}})();
+/]]>/* */
+</script>
+
+<meta name="e6f914364a2f4c2796b3435f3e97a7bdab34c6b4" content="e6f914364a2f4c2796b3435f3e97a7bdab34c6b4" />
+<meta name="clckd" content="5e4c0506285864f6a98d8bcbdbddae44" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Play7 | Missões Lucrativas</title>
+<script id="aclib" type="text/javascript" src="//acscdn.com/script/aclib.js"></script>
+<link rel="icon" type="image/png" href="https://i.ibb.co/KcJjFWFv/Polish-20260420-144050885.png">
+
+<style>
+* { box-sizing: border-box; }
+:root { --bg-deep: #0f111a; --bg-card: #171a26; --primary: #00e676; --accent: #ff9100; --text: #ffffff; --border: #2d313d; }
+body { font-family: 'Inter', sans-serif; background: var(--bg-deep); color: var(--text); margin: 0; padding-bottom: 100px; overflow-x: hidden; width: 100%; }
+
+.header { background: rgba(23,26,38,0.95); padding: 0 20px; border-bottom: 1px solid var(--border); position: fixed; top: 0; width: 100%; z-index: 100; backdrop-filter: blur(10px); display: flex; justify-content: space-between; align-items: center; height: 80px; }
+#user-display { color:var(--primary); font-weight: 900; font-size: 1.5rem; }
+.user-area { display: flex; align-items: center; gap: 8px; position: relative; }
+.flag-icon { width: 24px; height: 18px; object-fit: cover; border-radius: 2px; border: 1px solid rgba(255,255,255,0.2); cursor: pointer; }
+.lang-menu { display: none; position: absolute; top: 35px; right: 0; background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; padding: 10px; width: 130px; z-index: 500; box-shadow: 0 10px 25px rgba(0,0,0,0.5); }
+.lang-option { display: flex; align-items: center; gap: 10px; padding: 8px; font-size: 0.8rem; color: #ccc; transition: 0.2s; }
+.bell-btn { background: none; border: none; cursor: pointer; position: relative; display: flex; align-items: center; }
+.bell-btn img { width: 45px; height: 45px; }
+.notification-dot { position: absolute; top: 5px; right: 5px; width: 12px; height: 12px; background: #ff4444; border-radius: 50%; display: none; border: 2px solid var(--bg-deep); box-shadow: 0 0 8px #ff4444; }
+
+.balance-box { margin-top: 100px; padding: 20px; }
+.card { background: var(--bg-card); border-radius: 16px; border: 1px solid var(--border); padding: 20px; text-align: center; }
+.balance-val { font-size: 2.8rem; color: var(--primary); font-weight: 800; margin: 5px 0; }
+.promo-banner { width: 100%; border-radius: 12px; margin-top: 15px; border: 1px solid var(--border); }
+
+.invite-alert { background: linear-gradient(135deg, #1a1d2e 0%, #004d28 100%); border: 2px solid var(--primary); border-radius: 16px; margin: 0 20px 20px 20px; padding: 15px; display: flex; align-items: center; gap: 15px; cursor: pointer; text-decoration: none; animation: pulse 2s infinite; }
+@keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(0, 230, 118, 0.4); } 70% { box-shadow: 0 0 0 10px rgba(0, 230, 118, 0); } 100% { box-shadow: 0 0 0 0 rgba(0, 230, 118, 0); } }
+.invite-icon { font-size: 2rem; }
+.invite-txt b { color: var(--primary); font-size: 1.1rem; font-weight: 900; }
+.invite-txt p { margin: 3px 0 0 0; font-size: 0.85rem; color: #b0b3b8; }
+.arrow-right { margin-left: auto; color: var(--primary); font-weight: 900; }
+
+.section-title { border-left: 5px solid var(--primary); padding-left: 12px; margin: 25px 20px; font-size: 1.3rem; font-weight: 800; }
+.task-list { padding: 0 20px; }
+.task { background: var(--bg-card); border: 1px solid var(--border); padding: 18px; border-radius: 15px; margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center; }
+.task-info b { color: var(--primary); font-size: 1rem; display: block; margin-top: 4px; }
+
+.btn { background: var(--primary); color: #000; border: none; padding: 12px 22px; border-radius: 10px; font-weight: 900; cursor: pointer; text-decoration: none; font-size: 0.85rem; text-transform: uppercase; }
+.btn:disabled { background: #2d313d !important; color: #888 !important; cursor: not-allowed; }
+
+.modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 2000; justify-content: center; align-items: center; }
+.modal-content { background: var(--bg-card); padding: 35px; border-radius: 25px; text-align: center; border: 1px solid var(--primary); width: 85%; max-width: 400px; }
+.nav { position: fixed; bottom: 0; left: 0; width: 100%; background: #0a0c12; display: flex; justify-content: space-around; padding: 12px 0; border-top: 1px solid var(--border); z-index: 1000; }
+.nav a { color: #b0b3b8; text-decoration: none; font-size: 0.75rem; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.nav a img { width: 24px; height: 24px; }
+.ad-container { margin: 25px 0; text-align: center; min-height: 50px; }
+</style>
 </head>
 <body>
 
-<div class="container">
-    <h3 style="margin-top:0">🎧 Missão Oficial Play7</h3>
-    <p style="font-size: 13px; color: #aaa;">O botão de resgate aparecerá após 90 segundos.</p>
-
-    <iframe 
-        style="border-radius:12px" 
-        src="https://open.spotify.com/embed/track/3036j0FisU9UatwH8U1m6t?utm_source=generator&theme=0" 
-        width="100%" 
-        height="152" 
-        frameBorder="0" 
-        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
-        loading="lazy">
-    </iframe>
-
-    <div class="timer" id="cronometro">90s</div>
-    <button id="btnResgate" class="btn-play7" disabled>OUÇA PARA LIBERAR</button>
+<!-- O CONTEÚDO HTML DO CORPO PERMANECE IGUAL -->
+<div class="header">
+<div class="user-area">
+<div id="user-display">Olá!</div>
+<img src="https://upload.wikimedia.org/wikipedia/commons/0/05/Flag_of_Brazil.svg" class="flag-icon" onclick="toggleLang()">
+<div class="lang-menu" id="lang-menu">
+<div class="lang-option" onclick="toggleLang()"><img src="https://upload.wikimedia.org/wikipedia/commons/0/05/Flag_of_Brazil.svg" width="18"> Português</div>
+<div class="lang-option" onclick="toggleLang()"><img src="https://upload.wikimedia.org/wikipedia/commons/a/a4/Flag_of_the_United_States.svg" width="18"> English (US)</div>
+</div>
+</div>
+<button class="bell-btn" onclick="abrirCheckin()">
+<img src="https://i.ibb.co/fzCwSMq9/bell-reminder-icon-green-and-white-color-free-png.png">
+<div id="dot" class="notification-dot"></div>
+</button>
 </div>
 
+<div id="modal-checkin" class="modal">
+<div class="modal-content">
+<h2 style="color:var(--primary); margin-top:0;">Bônus Diário! 🎁</h2>
+<p>Seu presente de <b>R$` 2,50</b> está pronto.</p>
+<button class="btn" onclick="realizarCheckin()" style="width:100%; padding:18px;">RESGATAR AGORA</button>
+</div>
+</div>
+
+<div id="modal-ja-resgatado" class="modal">
+<div class="modal-content" style="border-color: var(--accent);">
+<h2 style="color:var(--accent); margin-top:0;">Aviso! ⚠️</h2>
+<p>Você já resgatou o bônus de hoje! Volte amanhã.</p>
+<button class="btn" onclick="document.getElementById('modal-ja-resgatado').style.display='none'" style="width:100%; padding:18px; background:var(--accent)">ENTENDIDO</button>
+</div>
+</div>
+
+<div class="balance-box">
+<div class="card">
+<small style="letter-spacing:1px">SALDO TOTAL</small>
+<div class="balance-val" id="saldo">R`$ 0,00</div>
+<img src="https://i.ibb.co/nMqgTPjH/Polish-20260420-135926686.png" class="promo-banner">
+</div>
+</div>
+
+<a href="indicar.html" class="invite-alert">
+<div class="invite-icon">🏆</div>
+<div class="invite-txt">
+<b>GANHE R$` 100,00 AGORA</b>
+<p>Convide seus amigos e receba!</p>
+</div>
+<div class="arrow-right">➔</div>
+</a>
+
+<h3 class="section-title">Missões Disponíveis 🔥</h3>
+
+<div class="task-list">
+
+<div class="task"><div class="task-info"><strong>VÍDEO #81</strong><br><small>Assista 30s</small><b>+ R  5,00</b></div><button class="btn" onclick="executarMissao(this, 'inter-inv.html', 5.00, 5000, 'm82')">INICIAR</button></div>
+<div class="task"><div class="task-info"><strong>SUBMARINO</strong><br><small>Ofertas de Games</small><b>+ R  1,50</b></div><button class="btn" onclick="executarMissao(this, 'adidas.html', 1.50, 5000, 'm84')">INICIAR</button></div>
+<div class="task" style="border: 1px solid var(--accent);"><div class="task-info"><strong>#GAME #85</strong><br><small>Alvo Móvel</small><b>+ R$` 0,80</b></div><button class="btn" style="background:var(--accent)" onclick="executarMissao(this, 'game85.html', 0.80, 5000, 'm85')">JOGAR</button></div>
+
+<div class="ad-container"><div id="container-dd67faf43ae614125e2514fd79f215d3"></div></div>
+
+<div class="task"><div class="task-info"><strong>VÍDEO #86</strong><br><small>Assista 30s</small><b>+ R$ 0,50&lt;/b&gt;&lt;/div&gt;&lt;button class="btn" onclick="executarMissao(this, 'video86.html', 0.50, 30000, 'm86')"&gt;INICIAR&lt;/button&gt;&lt;/div&gt; &lt;div class="task"&gt;&lt;div class="task-info"&gt;&lt;strong&gt;SANTANDER&lt;/strong&gt;&lt;br&gt;&lt;small&gt;Cartão SX&lt;/small&gt;&lt;b&gt;+ R$ 10,00</b></div><button class="btn" onclick="executarMissao(this, 'santander.html', 10.00, 5000, 'm87')">INICIAR</button></div>
+<div class="task"><div class="task-info"><strong>RENEE</strong><br><small>Look do Dia</small><b>+ R$ 1,20&lt;/b&gt;&lt;/div&gt;&lt;button class="btn" onclick="executarMissao(this, 'renee.html', 1.20, 5000, 'm88')"&gt;INICIAR&lt;/button&gt;&lt;/div&gt; &lt;div class="task"&gt;&lt;div class="task-info"&gt;&lt;strong&gt;VALE S.A.&lt;/strong&gt;&lt;br&gt;&lt;small&gt;Relatório ESG&lt;/small&gt;&lt;b&gt;+ R$ 2,00</b></div><button class="btn" onclick="executarMissao(this, 'vale.html', 2.00, 5000, 'm89')">INICIAR</button></div>
+<div class="task" style="border: 1px solid var(--accent);"><div class="task-info"><strong>#GAME #90</strong><br><small>Memória Flash</small><b>+ R`$ 0,60</b></div><button class="btn" style="background:var(--accent)" onclick="executarMissao(this, 'game90.html', 0.60, 5000, 'm90')">JOGAR</button></div>
+
+<div class="ad-container"><div id="container-dd67faf43ae614125e2514fd79f215d3"></div></div>
+
+<div class="task"><div class="task-info"><strong>VÍDEO #91</strong><br><small>Assista 30s</small><b>+ R  3,00</b></div><button class="btn" onclick="executarMissao(this, 'mercadopago.html', 3.00, 5000, 'm92')">INICIAR</button></div>
+<div class="task"><div class="task-info"><strong>NIKE APP</strong><br><small>Ofertas Exclusivas</small><b>+ R  1,50</b></div><button class="btn" onclick="executarMissao(this, 'play7web.html', 1.50, 5000, 'm94')">INICIAR</button></div>
+<div class="task" style="border: 1px solid var(--accent);"><div class="task-info"><strong>#GAME #95</strong><br><small>Labirinto 3D</small><b>+ R$` 0,80</b></div><button class="btn" style="background:var(--accent)" onclick="executarMissao(this, 'game95.html', 0.80, 5000, 'm95')">JOGAR</button></div>
+
+<div class="ad-container"><div id="container-dd67faf43ae614125e2514fd79f215d3"></div></div>
+
+<div class="task"><div class="task-info"><strong>VÍDEO #96</strong><br><small>Assista 30s</small><b>+ R$ 0,50&lt;/b&gt;&lt;/div&gt;&lt;button class="btn" onclick="executarMissao(this, 'video96.html', 0.50, 30000, 'm96')"&gt;INICIAR&lt;/button&gt;&lt;/div&gt; &lt;div class="task"&gt;&lt;div class="task-info"&gt;&lt;strong&gt;ITAÚ UNIBANCO&lt;/strong&gt;&lt;br&gt;&lt;small&gt;Simular Consórcio&lt;/small&gt;&lt;b&gt;+ R$ 10,00</b></div><button class="btn" onclick="executarMissao(this, 'itau.html', 10.00, 5000, 'm97')">INICIAR</button></div>
+<div class="task"><div class="task-info"><strong>LUNA APP</strong><br><small>Conhecer App</small><b>+ R$ 2,50&lt;/b&gt;&lt;/div&gt;&lt;button class="btn" onclick="executarMissao(this, 'luna.html', 2.50, 5000, 'm98')"&gt;INICIAR&lt;/button&gt;&lt;/div&gt; &lt;div class="task"&gt;&lt;div class="task-info"&gt;&lt;strong&gt;DROPBOX&lt;/strong&gt;&lt;br&gt;&lt;small&gt;Espaço Grátis&lt;/small&gt;&lt;b&gt;+ R$ 1,00</b></div><button class="btn" onclick="executarMissao(this, 'dropbox.html', 1.00, 5000, 'm99')">INICIAR</button></div>
+<div class="task"><div class="task-info"><strong>FINAL #100</strong><br><small>Bônus Especial</small><b>+ R`$ 5,00</b></div><button class="btn" onclick="executarMissao(this, 'bonus100.html', 5.00, 5000, 'm100')">RESGATAR</button></div>
+
+<div class="ad-container"><div id="container-dd67faf43ae614125e2514fd79f215d3"></div></div>
+
+<div class="task"><div class="task-info"><strong>MISSÃO #101</strong><br><small>Avaliar Play7</small><b>+ Rlatex
+ 1,00&lt;/b&gt;&lt;/div&gt;&lt;button class="btn" onclick="executarMissao(this, 'feedback.html', 1.00, 5000, 'm101')"&gt;INICIAR&lt;/button&gt;&lt;/div&gt; &lt;div class="task"&gt;&lt;div class="task-info"&gt;&lt;strong&gt;MISSÃO #102&lt;/strong&gt;&lt;br&gt;&lt;small&gt;Seguir Youtube&lt;/small&gt;&lt;b&gt;+ R
+
+ 1,50</b></div><button class="btn" onclick="executarMissao(this, 'youtube.html', 1.50, 5000, 'm102')">INICIAR</button></div>
+<div class="task"><div class="task-info"><strong>MISSÃO #103</strong><br><small>Entrar Discord</small><b>+ Rlatex
+ 2,00&lt;/b&gt;&lt;/div&gt;&lt;button class="btn" onclick="executarMissao(this, 'discord.html', 2.00, 5000, 'm103')"&gt;INICIAR&lt;/button&gt;&lt;/div&gt; &lt;div class="task"&gt;&lt;div class="task-info"&gt;&lt;strong&gt;MISSÃO #104&lt;/strong&gt;&lt;br&gt;&lt;small&gt;Compartilhar App&lt;/small&gt;&lt;b&gt;+ R
+
+ 3,00</b></div><button class="btn" onclick="executarMissao(this, 'share.html', 3.00, 5000, 'm104')">INICIAR</button></div>
+<div class="task" style="border: 2px solid var(--primary);"><div class="task-info"><strong>MISSÃO #105</strong><br><small>Ouro Final</small><b>+ R$ 10,00</b></div><button class="btn" onclick="executarMissao(this, 'ouro.html', 10.00, 5000, 'm105')">FINALIZAR</button></div>
+</div>
+
+<div class="nav">
+<a href="index.html" style="color:var(--primary)"><img src="https://i.ibb.co/rKxdd5Cy/missao.png">Missões</a>
+<a href="indicar.html"><img src="https://i.ibb.co/MydkMrn7/amigo.png">Indicar</a>
+<a href="suporte.html"><img src="https://i.ibb.co/n8ZdnnVb/suporte-tecnico-1.png">Suporte</a>
+<a href="saque-pix.html"><img src="https://i.ibb.co/kgyQrPq6/bolsa-de-dinheiro.png">Sacar</a>
+</div>
+
+<!-- 2. O SCRIPT DE LÓGICA NO FINAL DO BODY -->
 <script>
-    let tempo = 90;
-    const display = document.getElementById('cronometro');
-    const botao = document.getElementById('btnResgate');
+if (localStorage.getItem('user_name') === null) {
+window.location.href = "login.html";
+}
 
-    // Inicia o contador automaticamente ao carregar a página
-    const contador = setInterval(() => {
-        tempo--;
-        display.innerText = tempo + "s";
+if (localStorage.getItem('saldo_atual') === null) {
+localStorage.setItem('saldo_atual', '10.00');
+}
 
-        if (tempo <= 0) {
-            clearInterval(contador);
-            display.style.display = "none";
-            botao.disabled = false;
-            botao.innerText = "RESGATAR RECOMPENSA";
-            botao.classList.add('btn-active');
-        }
-    }, 1000);
+let saldoLocal = parseFloat(localStorage.getItem('saldo_atual'));
+let missoesConcluidas = JSON.parse(localStorage.getItem('missoes_feitas')) || [];
 
-    botao.onclick = () => {
-        if(!botao.disabled) {
-            window.location.href = "https://www.play7oficial.com"; // Link da sua plataforma
-        }
-    };
+const nomeSalvo = localStorage.getItem('user_name') || "Usuário";
+document.getElementById('user-display').innerText = Olá,${nomeSalvo}!`;
+
+// CONFIGURAÇÃO DO RODÍZIO DE ANÚNCIOS
+const IDs_MONETAG = ['8832560', '8832561', '8832562', '8832563', '8832564', '8832565', '8832566', '8832567', '8832568', '8832569', '8832570', '8832571', '8832572', '8832573', '8832574', '8832575', '8832576', '8832577', '8832578'];
+const LINK_VAST = "https://pockethold.com/v/966440";
+
+function atualizarInterface() {
+document.getElementById('saldo').innerText = R$${saldoLocal.toFixed(2).replace('.', ',')};
+const botoes = document.querySelectorAll('.btn');
+botoes.forEach(btn => {
+const onclickAttr = btn.getAttribute('onclick');
+if (onclickAttr) {
+const match = onclickAttr.match(/'(m\d+)'/);
+if (match && missoesConcluidas.includes(match[1])) {
+btn.disabled = true;
+btn.innerText = "CONCLUÍDO ✅";
+btn.style.background = "#2d313d";
+}
+}
+});
+}
+
+function toggleLang() {
+const menu = document.getElementById('lang-menu');
+menu.style.display = (menu.style.display === 'block') ? 'none' : 'block';
+}
+
+function abrirCheckin() {
+const hoje = new Date().toLocaleDateString();
+if (localStorage.getItem('ultimo_checkin') === hoje) {
+document.getElementById('modal-ja-resgatado').style.display = 'flex';
+} else {
+document.getElementById('modal-checkin').style.display = 'flex';
+}
+}
+
+function realizarCheckin() {
+saldoLocal += 2.50;
+localStorage.setItem('saldo_atual', saldoLocal);
+localStorage.setItem('ultimo_checkin', new Date().toLocaleDateString());
+atualizarInterface();
+document.getElementById('dot').style.display = 'none';
+document.getElementById('modal-checkin').style.display = 'none';
+window.open('https://mercadolivre.com.br', '_blank');
+}
+
+// NOVA FUNÇÃO COM RODÍZIO DE ANÚNCIOS (SUBSTITUI A ANTIGA)
+function executarMissao(btn, link, valor, tempo, idMissao) {
+if(btn.disabled) return;
+
+const numeroMissao = parseInt(idMissao.replace('m', ''));
+
+// Rodízio: Ímpar abre VAST / Par abre MONETAG
+if (numeroMissao % 2 !== 0) {
+window.open(LINK_VAST, '_blank');
+} else {
+const idSorteado = IDs_MONETAG[Math.floor(Math.random() * IDs_MONETAG.length)];
+window.open(https://creepingunfasten.com/vignette/${idSorteado}, '_blank');
+}
+
+btn.disabled = true;
+btn.innerText = "VALIDANDO...";
+
+// Abre o link da tarefa com delay para não bloquear popup
+setTimeout(() => {
+window.open(link, '_blank');
+}, 600);
+
+setTimeout(() => {
+saldoLocal += valor;
+missoesConcluidas.push(idMissao);
+localStorage.setItem('saldo_atual', saldoLocal);
+localStorage.setItem('missoes_feitas', JSON.stringify(missoesConcluidas));
+atualizarInterface();
+}, tempo);
+}
+
+window.onload = () => {
+atualizarInterface();
+const hoje = new Date().toLocaleDateString();
+if (localStorage.getItem('ultimo_checkin') !== hoje) {
+document.getElementById('dot').style.display = 'block';
+}
+};
 </script>
-
 </body>
-</html>
+                                                                                                                                                                      </html>
