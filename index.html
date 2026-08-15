@@ -287,11 +287,11 @@
 
   <script>
     // Configuração do seu ID de Afiliado
-    const MATT_TOOL = "SUA_TAG_AQUI"; // Insira aqui sua tag/ID de afiliado do ML quando tiver
+    const MATT_TOOL = "SUA_TAG_AQUI"; 
 
     let listaDeCompras = [];
 
-    // Função de busca com Proxy para contornar o bloqueio CORS no GitHub Pages
+    // Busca utilizando a API do AllOrigins para ignorar bloqueio de CORS
     async function buscarProdutos() {
       const termo = document.getElementById('searchInput').value;
       const grid = document.getElementById('productsGrid');
@@ -302,15 +302,16 @@
 
       try {
         const urlApiML = `https://api.mercadolibre.com/sites/MLB/search?q=${encodeURIComponent(termo)}&limit=8`;
-        const urlProxy = `https://api.corsproxy.io/?${encodeURIComponent(urlApiML)}`;
+        const urlProxy = `https://api.allorigins.win/get?url=${encodeURIComponent(urlApiML)}`;
 
         const response = await fetch(urlProxy);
 
         if (!response.ok) {
-          throw new Error(`Erro na requisição: ${response.status}`);
+          throw new Error(`Erro na rede: ${response.status}`);
         }
 
-        const data = await response.json();
+        const wrapper = await response.json();
+        const data = JSON.parse(wrapper.contents);
 
         grid.innerHTML = '';
 
@@ -390,7 +391,6 @@
       totalContainer.innerText = `R$ ${total.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`;
     }
 
-    // Executa a busca automática ao abrir
     window.onload = buscarProdutos;
   </script>
 </body>
