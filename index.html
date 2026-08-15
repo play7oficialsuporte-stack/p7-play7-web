@@ -4,6 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Comparador & Lista de Compras | Finanças</title>
+  <!-- Importando jQuery para suporte nativo a JSONP -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <style>
     :root {
       --primary: #2563eb;
@@ -291,63 +293,61 @@
 
     let listaDeCompras = [];
 
-    // Busca utilizando a API do AllOrigins para ignorar bloqueio de CORS
-    async function buscarProdutos() {
-      const termo = document.getElementById('searchInput').value;
-      const grid = document.getElementById('productsGrid');
+    // Busca utilizando JSONP para contornar totalmente o CORS
+    function buscarProdutos() {
+      const termo = $('#searchInput').val();
+      const grid = $('#productsGrid');
 
       if (!termo) return;
 
-      grid.innerHTML = '<p style="color: var(--text-muted);">Buscando ofertas...</p>';
+      grid.html('<p style="color: var(--text-muted);">Buscando ofertas no Mercado Livre...</p>');
 
-      try {
-        const urlApiML = `https://api.mercadolibre.com/sites/MLB/search?q=${encodeURIComponent(termo)}&limit=8`;
-        const urlProxy = `https://api.allorigins.win/get?url=${encodeURIComponent(urlApiML)}`;
+      $.ajax({
+        url: `https://api.mercadolibre.com/sites/MLB/search?q=${encodeURIComponent(termo)}&limit=8`,
+        dataType: 'jsonp',
+        success: function(response) {
+          grid.empty();
 
-        const response = await fetch(urlProxy);
+          // A resposta JSONP vem encapsulada dentro de response.data ou direto
+          const results = response.data ? response.data.results : response.results;
 
-        if (!response.ok) {
-          throw new Error(`Erro na rede: ${response.status}`);
-        }
-
-        const wrapper = await response.json();
-        const data = JSON.parse(wrapper.contents);
-
-        grid.innerHTML = '';
-
-        if (!data.results || data.results.length === 0) {
-          grid.innerHTML = '<p>Nenhum produto encontrado.</p>';
-          return;
-        }
-
-        data.results.forEach(produto => {
-          let linkAfiliado = produto.permalink;
-          if (typeof MATT_TOOL !== 'undefined' && MATT_TOOL && MATT_TOOL !== "SUA_TAG_AQUI") {
-            linkAfiliado += `?matt_tool=${MATT_TOOL}`;
+          if (!results || results.length === 0) {
+            grid.html('<p>Nenhum produto encontrado.</p>');
+            return;
           }
 
-          const card = document.createElement('div');
-          card.className = 'product-card';
-          card.innerHTML = `
-            <div>
-              <img class="product-img" src="${produto.thumbnail.replace('I.jpg', 'O.jpg')}" alt="${produto.title}">
-              <div class="product-title" title="${produto.title}">${produto.title}</div>
-              <div class="product-price">R$ ${produto.price.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</div>
-            </div>
-            <div class="card-actions">
-              <a href="${linkAfiliado}" target="_blank" rel="noopener noreferrer" class="btn-buy">Ver no Mercado Livre</a>
-              <button class="btn-add" onclick="adicionarAALista('${produto.id}', '${produto.title.replace(/'/g, "\\'")}', ${produto.price}, '${linkAfiliado}')">
-                + Adicionar à Lista
-              </button>
-            </div>
-          `;
-          grid.appendChild(card);
-        });
+          results.forEach(produto => {
+            let linkAfiliado = produto.permalink;
+            if (typeof MATT_TOOL !== 'undefined' && MATT_TOOL && MATT_TOOL !== "SUA_TAG_AQUI") {
+              linkAfiliado += `?matt_tool=${MATT_TOOL}`;
+            }
 
-      } catch (error) {
-        console.error("Erro ao buscar produtos:", error);
-        grid.innerHTML = '<p style="color: red;">Erro ao carregar os produtos. Tente novamente em instantes.</p>';
-      }
+            const img = produto.thumbnail.replace('http://', 'https://').replace('I.jpg', 'O.jpg');
+            const tituloLimpo = produto.title.replace(/'/g, "\\'");
+
+            const card = `
+              <div class="product-card">
+                <div>
+                  <img class="product-img" src="${img}" alt="${produto.title}">
+                  <div class="product-title" title="${produto.title}">${produto.title}</div>
+                  <div class="product-price">R$ ${produto.price.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</div>
+                </div>
+                <div class="card-actions">
+                  <a href="${linkAfiliado}" target="_blank" rel="noopener noreferrer" class="btn-buy">Ver no Mercado Livre</a>
+                  <button class="btn-add" onclick="adicionarAALista('${produto.id}', '${tituloLimpo}', ${produto.price}, '${linkAfiliado}')">
+                    + Adicionar à Lista
+                  </button>
+                </div>
+              </div>
+            `;
+            grid.append(card);
+          });
+        },
+        error: function(err) {
+          console.error("Erro na busca:", err);
+          grid.html('<p style="color: red;">Erro ao buscar produtos. Tente novamente.</p>');
+        }
+      });
     }
 
     // Gerenciamento da Lista de Compras
@@ -362,36 +362,38 @@
     }
 
     function atualizarListaHTML() {
-      const cartContainer = document.getElementById('cartItems');
-      const totalContainer = document.getElementById('cartTotal');
+      const cartContainer = $('#cartItems');
+      const totalContainer = $('#cartTotal');
 
       if (listaDeCompras.length === 0) {
-        cartContainer.innerHTML = '<p style="color: var(--text-muted); font-size: 0.9rem;">Sua lista está vazia.</p>';
-        totalContainer.innerText = 'R$ 0,00';
+        cartContainer.html('<p style="color: var(--text-muted); font-size: 0.9rem;">Sua lista está vazia.</p>');
+        totalContainer.text('R$ 0,00');
         return;
       }
 
-      cartContainer.innerHTML = '';
+      cartContainer.empty();
       let total = 0;
 
       listaDeCompras.forEach((item, index) => {
         total += item.preco;
-        const li = document.createElement('li');
-        li.className = 'cart-item';
-        li.innerHTML = `
-          <div class="cart-item-info">
-            <div class="cart-item-title">${item.titulo}</div>
-            <div class="cart-item-price">R$ ${item.preco.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</div>
-          </div>
-          <button class="btn-remove" onclick="removerDaLista(${index})">&times;</button>
+        const li = `
+          <li class="cart-item">
+            <div class="cart-item-info">
+              <div class="cart-item-title">${item.titulo}</div>
+              <div class="cart-item-price">R$ ${item.preco.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</div>
+            </div>
+            <button class="btn-remove" onclick="removerDaLista(${index})">&times;</button>
+          </li>
         `;
-        cartContainer.appendChild(li);
+        cartContainer.append(li);
       });
 
-      totalContainer.innerText = `R$ ${total.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`;
+      totalContainer.text(`R$ ${total.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`);
     }
 
-    window.onload = buscarProdutos;
+    $(document).ready(function() {
+      buscarProdutos();
+    });
   </script>
 </body>
 </html>
