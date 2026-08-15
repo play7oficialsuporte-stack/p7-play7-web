@@ -243,6 +243,7 @@
       color: #ef4444;
       cursor: pointer;
       font-weight: bold;
+      font-size: 1.2rem;
     }
   </style>
 </head>
@@ -255,7 +256,7 @@
     </header>
 
     <div class="search-box">
-      <input type="text" id="searchInput" placeholder="Ex: Livro Pai Rico Pai Pobre, Calculadora HP..." value="Calculadora HP 12C">
+      <input type="text" id="searchInput" placeholder="Ex: Livro Pai Rico Pai Pobre, Calculadora HP..." value="Retrovisor uno 97">
       <button onclick="buscarProdutos()">Buscar</button>
     </div>
 
@@ -290,7 +291,7 @@
 
     let listaDeCompras = [];
 
-    // Função para buscar produtos diretamente na API Pública do Mercado Livre
+    // Função de busca com Proxy para contornar o bloqueio CORS no GitHub Pages
     async function buscarProdutos() {
       const termo = document.getElementById('searchInput').value;
       const grid = document.getElementById('productsGrid');
@@ -300,20 +301,27 @@
       grid.innerHTML = '<p style="color: var(--text-muted);">Buscando ofertas...</p>';
 
       try {
-        const response = await fetch(`https://api.mercadolibre.com/sites/MLB/search?q=${encodeURIComponent(termo)}&limit=8`);
+        const urlApiML = `https://api.mercadolibre.com/sites/MLB/search?q=${encodeURIComponent(termo)}&limit=8`;
+        const urlProxy = `https://api.corsproxy.io/?${encodeURIComponent(urlApiML)}`;
+
+        const response = await fetch(urlProxy);
+
+        if (!response.ok) {
+          throw new Error(`Erro na requisição: ${response.status}`);
+        }
+
         const data = await response.json();
 
         grid.innerHTML = '';
 
-        if (data.results.length === 0) {
+        if (!data.results || data.results.length === 0) {
           grid.innerHTML = '<p>Nenhum produto encontrado.</p>';
           return;
         }
 
         data.results.forEach(produto => {
-          // Constrói o link do produto aplicando a tag de afiliado
           let linkAfiliado = produto.permalink;
-          if (MATT_TOOL && MATT_TOOL !== "SUA_TAG_AQUI") {
+          if (typeof MATT_TOOL !== 'undefined' && MATT_TOOL && MATT_TOOL !== "SUA_TAG_AQUI") {
             linkAfiliado += `?matt_tool=${MATT_TOOL}`;
           }
 
@@ -337,7 +345,7 @@
 
       } catch (error) {
         console.error("Erro ao buscar produtos:", error);
-        grid.innerHTML = '<p style="color: red;">Erro ao carregar os produtos. Tente novamente.</p>';
+        grid.innerHTML = '<p style="color: red;">Erro ao carregar os produtos. Tente novamente em instantes.</p>';
       }
     }
 
@@ -382,7 +390,7 @@
       totalContainer.innerText = `R$ ${total.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`;
     }
 
-    // Realiza uma busca inicial automática ao carregar
+    // Executa a busca automática ao abrir
     window.onload = buscarProdutos;
   </script>
 </body>
